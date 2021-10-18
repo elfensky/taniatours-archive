@@ -12,11 +12,12 @@ See an "agenda" of booked tours.
 Reply to reviews. 
 
 **Nice to have**
+- CI/CD with Github Actions to Test / Deploy the project
 - email notifications when booking a tour for user and admin
 - payment processor integration
 - calendar API for admin agenda to sync to phone + generate ics calendar file for user. 
 - reviews have images
-- front-end based image optimization 
+- front-end based image optimization
 
 ## frontend
 Feature: user-facing website: 
