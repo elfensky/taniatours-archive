@@ -139,4 +139,8 @@ strapi or ghost for CMS?
 
 -   container1: nuxt.js (in node)
 -   container2: strapi
+    -> users, roles & auth
+    -> blogs
+    -> tours
+    -> comments
 -   container3: mongodb
