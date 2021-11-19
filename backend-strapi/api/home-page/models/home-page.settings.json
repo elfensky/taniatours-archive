@@ -1,0 +1,40 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_pages",
+  "info": {
+    "name": "HomePage"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Header": {
+      "type": "component",
+      "repeatable": false,
+      "component": "general.square-section"
+    },
+    "About": {
+      "type": "component",
+      "repeatable": false,
+      "component": "general.square-section"
+    },
+    "Blog": {
+      "type": "component",
+      "repeatable": false,
+      "component": "general.square-section"
+    },
+    "Tours": {
+      "type": "component",
+      "repeatable": false,
+      "component": "general.square-section"
+    },
+    "Contact": {
+      "type": "component",
+      "repeatable": false,
+      "component": "general.square-section"
+    }
+  }
+}

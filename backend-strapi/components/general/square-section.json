@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_general_square_sections",
+  "info": {
+    "name": "SquareSection",
+    "icon": "columns"
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Subtitle": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "string"
+    }
+  }
+}

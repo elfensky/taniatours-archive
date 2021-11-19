@@ -26,3 +26,13 @@ services:
             - '1337:1337'
         depends_on:
             - mariadb
+
+    # nuxtjs:
+    #     image: elfensky/nuxtjs
+    #     build:
+    #         context: ./frontend-nuxt/
+    #         dockerfile: ./frontend-nuxt/Dockerfile
+    #     ports:
+    #         - 3000:3000
+    #     depends_on:
+    #         - strapi
