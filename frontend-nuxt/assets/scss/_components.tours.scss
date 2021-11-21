@@ -120,14 +120,14 @@
 	opacity: 0;
 	transition: 2s ease;
 	// animation: image_fade_in 1s ;
-	background-image: url("");
+	// background-image: url("");
 }
 
 #abbeyvillers:hover ~ #image {
 	opacity: 1;
 	transition: 2s ease;
 	// animation: image_fade_in 1s ;
-	background-image: url("~/assets/images/tours/abbeyvillers3.jpg");
+	background-image: url("/assets/images/tours/abbeyvillers3.jpg");
 	// object-fit: cover;
 	// background-position: center;
 	// background-clip:
@@ -137,7 +137,7 @@
 	opacity: 0;
 	transition: 1s ease;
 	// animation: image_fade_in 1s ;
-	background-image: url("#");
+	// background-image: url("#");
 }
 
 #bruges:hover ~ #image {

@@ -1,8 +1,8 @@
 <template>
-	<section class="c-header o-section scrollify">
+	<section :id="name" class="c-header o-section scrollify">
 		<!-- VIDEO  -->
 		<video
-			v-if="this.name === 'header'"
+			v-if="name === 'header'"
 			id="video"
 			class="c-header__video"
 			playsinline="playsinline"
@@ -26,29 +26,21 @@
 			<div class="o-grid__info">
 				{{ sectionContent.Description }}
 			</div>
-			<div class="o-grid__links c-header__links">
-				<!-- LINKS SHOULD BE ITS OWN COMPONENT WITH PASSED NAVIGATION -->
-				<!-- 2 types, one for navigating on the same page, another using nuxt's Navigation component  -->
-				<a href="javascript:smooth('aboutme');">LINK1</a>
-				<a href="javascript:smooth('tours');">LINK2</a>
-			</div>
 
-			<!-- SHOULD BE ITS OWN re-usable SECTION -->
-			<div class="o-grid__social">
-				<a id="instagram" href="#"><i class="fab fa-instagram"></i></a>
-				<a id="facebook" href="#"><i class="fab fa-facebook-f"></i></a>
-				<a id="twitter" href="#"><i class="fab fa-twitter"></i></a>
-				<a id="whatsapp" href="#"><i class="fab fa-whatsapp"></i></a>
-				<a id="viber" href="#"><i class="fab fa-viber"></i></a>
-			</div>
+			<SectionLinks v-if="links" :links="links" />
+			<SectionSocial v-if="social" />
 		</div>
 	</section>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+// import SectionLinks from "../components/SectionLinks.vue";
+// import SectionSocial from "../components/SectionSocial.vue";
 
 export default Vue.extend({
+	// name: "Section", //not needed. Filename is used?
+	// components: { SectionLinks, SectionSocial }, //done automatically in nuxt
 	props: {
 		name: {
 			type: String,
@@ -74,19 +66,23 @@ export default Vue.extend({
 			type: Object,
 			required: true,
 		},
+		links: {
+			type: Array,
+			required: false,
+		},
+		social: {
+			type: Boolean,
+			required: false,
+		},
 	},
 	data() {
 		return {};
 	},
 	computed: {
-		// localContent = (): any => { return this.content as any}
 		sectionContent() {
 			return this.content;
 		},
 	},
 	methods: {},
 });
-// function myLog(this: object) {
-// 	console.log(this.config);
-// }
 </script>

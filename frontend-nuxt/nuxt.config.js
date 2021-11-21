@@ -1,6 +1,6 @@
 export default {
 	//added myself:
-	mode: "universal",
+	// mode: "universal",
 	// Global page headers: https://go.nuxtjs.dev/config-head
 	head: {
 		title: "frontend-nuxt",
