@@ -1,31 +1,30 @@
-FROM node:lts as builder
+# start with a node alpine base image
+FROM node:16.13.0-alpine3.14
+# FROM node:lts as builder
 
+# create destination directory
+RUN mkdir -p /app
 WORKDIR /app
 
-COPY . .
+# update and install dependency
+RUN apk update && apk upgrade
+RUN apk add git
 
-RUN yarn install \
-  --prefer-offline \
-  --frozen-lockfile \
-  --non-interactive \
-  --production=false
+# copy the app, note .dockerignore
+COPY . /app
+# install all dependencies
+RUN npm install 
 
-RUN yarn build
+# build the nuxt.js application for production (instead of npm run dev)
+RUN npm run build
 
-RUN rm -rf node_modules && \
-  NODE_ENV=production yarn install \
-  --prefer-offline \
-  --pure-lockfile \
-  --non-interactive \
-  --production=true
+# set environment variables for nuxt app
+ENV NUXT_HOST 0.0.0.0
+ENV NUXT_PORT=9000
 
-FROM node:lts
+# expose port 9000 from the container to OS
+EXPOSE 9000
 
-WORKDIR /app
-
-COPY --from=builder /app  .
-
-ENV HOST 0.0.0.0
-EXPOSE 80
-
-CMD [ "yarn", "start" ]
+# start nuxt app
+# RUN npm run start 
+CMD [ "npm", "start" ]
