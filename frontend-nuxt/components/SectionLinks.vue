@@ -7,7 +7,7 @@
 		<nuxt-link
 			v-for="link in links"
 			:key="link.index"
-			:to="{ path: link.path, hash: link.hash }"
+			:to="localePath({ path: link.path, hash: link.hash })"
 			>{{ link.text }} <span>{{ ">>" }}</span></nuxt-link
 		>
 		<!-- <a>{{ links[0] }}</a> -->

@@ -35,12 +35,31 @@ export default {
 	],
 
 	// Modules: https://go.nuxtjs.dev/config-modules
-	modules: [],
+	modules: ["@nuxtjs/i18n"],
 
-	//added myself:
+	// Build Configuration: https://go.nuxtjs.dev/config-build
+	build: {},
+
+	// ADDED MYSELF:
 	router: {
 		middleware: ["mobile"],
 	},
-	// Build Configuration: https://go.nuxtjs.dev/config-build
-	build: {},
+
+	// internationalization plugin config
+	i18n: {
+		/* module options */
+		locales: ["en", "ru"],
+		defaultLocale: "en",
+		vueI18n: {
+			fallbackLocale: "en",
+			messages: {
+				en: {
+					welcome: "Welcome",
+				},
+				ru: {
+					welcome: "Добро пожаловать",
+				},
+			},
+		},
+	},
 };

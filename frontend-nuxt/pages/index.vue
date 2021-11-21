@@ -49,5 +49,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-//a comment in css
+//a comment inside css to check scss works
 </style>
