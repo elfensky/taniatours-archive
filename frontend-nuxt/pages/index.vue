@@ -1,51 +1,150 @@
 <template>
-	<div>
-		<Section
-			name="header"
-			position="right"
-			:content="content.Header"
-			:links="[
-				{ text: 'learn more', path: '/', hash: '#about' },
-				{ text: 'tours', path: '/', hash: '#tours' },
-			]"
-			:social="true"
-		/>
-		<Section name="about" position="left" :content="content.About" />
-		<Section
-			name="blog"
-			position="left"
-			:content="content.Blog"
-			:links="[{ text: 'see all', path: '/blog' }]"
-		/>
-		<!-- <Section name="tours" position="left" :content="content.Tours" />
-		<Section name="contant" position="left" :content="content.Contact" /> -->
-	</div>
+	<main class="o-main">
+		<div id="locale" style="text-align: right; position: absolute">
+			{{ $i18n.locale }}
+		</div>
+
+		<!-- HEADER -->
+		<LayoutSection id="header">
+			<VideoBackground />
+			<LayoutEmpty />
+			<LayoutSquare
+				v-if="!this.$apollo.queries.homePage.loading"
+				name="header">
+				<ContentGrid :content="homePage.Header" :social="true">
+					<ContentLinks
+						:links="[
+							{ text: 'About me', path: '/', hash: '#about' },
+							{ text: 'Tours', path: '/', hash: '#tours' },
+						]" />
+					<ContentSocial />
+				</ContentGrid>
+			</LayoutSquare>
+		</LayoutSection>
+
+		<!-- ABOUT -->
+		<LayoutSection id="about">
+			<LayoutSquare
+				v-if="!this.$apollo.queries.homePage.loading"
+				name="about">
+				<ContentGrid :content="homePage.About">
+					<ContentLinks
+						:links="[
+							{ text: 'Learn more', path: '/', hash: '#about' },
+						]" />
+				</ContentGrid>
+			</LayoutSquare>
+			<!-- <LayoutSquare></LayoutSquare> -->
+		</LayoutSection>
+
+		<!-- BLOG -->
+		<LayoutSection id="blog">
+			<LayoutSquare
+				v-if="!this.$apollo.queries.homePage.loading"
+				name="blog">
+				<ContentGrid :content="homePage.Blog">
+					<ContentLinks
+						:links="[
+							{ text: 'Learn more', path: '/', hash: '#about' },
+						]" />
+				</ContentGrid>
+			</LayoutSquare>
+			<LayoutEmpty />
+		</LayoutSection>
+	</main>
 </template>
 
-<script lang="ts">
-//not required in nuxt
-// import Section from "../components/Section.vue";
-// import Tutorial from "../components/Tutorial.vue";
-import gqlresponse from "../assets/data";
+<script>
+//lang="ts" fucks Middleware and I can't figure it out
+import Vue from 'vue'; //when used with ts, it fucks up Apollo
+import gql from 'graphql-tag';
+// import { gsap } from 'gsap';
+import VideoBackground from '../components/shared/VideoBackground';
 
-const links = [];
+function startAnimations() {
+	gsap.to('.o-grid__title', { duration: 1, color: 'red' });
+}
 
-export default {
-	// name: "index",
-	layout: ({ isMobile }: { isMobile: Boolean }) =>
-		isMobile ? "mobile" : "default",
-	// layout: "default",
-	setup() {},
-	// components: { Section, Tutorial },
+export default Vue.extend({
 	data() {
-		return {};
+		return {
+			currentLocale: this.$nuxt.$i18n.locale,
+			homePage: {},
+			// currentData: awaitthis.apollo.homePage,
+		};
 	},
-	computed: {
-		content() {
-			return gqlresponse.data.homePage;
+	mounted() {
+		// this.startAnimations();
+		this.currentLocale;
+	},
+	layout: ({ isMobile }) => (isMobile ? 'mobile' : 'default'),
+	created() {
+		// this.currentLocale;
+	},
+	methods: {},
+	updated() {
+		this.currentLocale;
+	},
+	apollo: {
+		homePage: {
+			query: gql`
+				query getHomePage($locale: String) {
+					homePage(locale: $locale) {
+						Header {
+							Title
+							Subtitle
+							Description
+						}
+						About {
+							Title
+							Subtitle
+							Description
+						}
+						Blog {
+							Title
+							Subtitle
+							Description
+						}
+						Tours {
+							Title
+							Subtitle
+							Description
+						}
+						Contact {
+							Title
+							Subtitle
+							Description
+						}
+					}
+				}
+			`,
+			variables() {
+				return {
+					locale: this.currentLocale,
+				};
+			},
+			prefetch: true,
+		},
+		blogs: {
+			query: gql`
+				query getBlogPosts($locale: String) {
+					blogs(locale: $locale, limit: 2) {
+						Title
+					}
+				}
+			`,
+			variables() {
+				return {
+					locale: this.currentLocale,
+				};
+			},
+			prefetch: true,
 		},
 	},
-};
+	components: {
+		VideoBackground,
+	},
+});
 </script>
 
 <style lang="scss" scoped>

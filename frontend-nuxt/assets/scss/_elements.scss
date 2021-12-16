@@ -1,21 +1,24 @@
-//ELEMENTS
-//no classes or ids, only pure html elements go here.
+// Elements – Style rules for bare HTML elements (like h1 or button).
 
-//Elements 
-//styling for bare HTML elements (like H1, A, etc.). 
-//These come with default styling from the browser so we can redefine them here.
-
-body{
-    font-size: $font-size;
-    font-family: $font-primary, $font-secondary;
+* {
+	font-family: $font-secondary;
 }
 
-a{
-    color: black;
-    text-decoration: none;
-
-    &:hover{
-        text-decoration: underline;
-    }
+h1 {
+	font-weight: $bold;
+	font-family: $font-primary;
 }
 
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: $medium;
+	font-family: $font-primary;
+}
+
+// body {
+// 	font-family: $regular;
+// 	font-family: $font-secondary;
+// }

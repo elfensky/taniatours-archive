@@ -4,7 +4,7 @@ export default function (context: {
 }) {
 	//sets user agent from headers is running in universal (ssr) mode, or from navigator.userAgent if running in SPA mode
 	let userAgent = process.server
-		? context.req.headers["user-agent"]
+		? context.req.headers['user-agent']
 		: navigator.userAgent;
 	// console.log(userAgent);
 	context.isMobile = /mobile/i.test(userAgent);

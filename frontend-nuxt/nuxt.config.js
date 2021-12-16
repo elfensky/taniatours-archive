@@ -3,27 +3,31 @@ export default {
 	// mode: "universal",
 	// Global page headers: https://go.nuxtjs.dev/config-head
 	head: {
-		title: "frontend-nuxt",
+		title: 'frontend-nuxt',
 		htmlAttrs: {
-			lang: "en",
+			lang: 'en',
 		},
 		meta: [
-			{ charset: "utf-8" },
+			{ charset: 'utf-8' },
 			{
-				name: "viewport",
-				content: "width=device-width, initial-scale=1",
+				name: 'viewport',
+				content: 'width=device-width, initial-scale=1',
 			},
-			{ hid: "description", name: "description", content: "" },
-			{ name: "format-detection", content: "telephone=no" },
+			{ hid: 'description', name: 'description', content: '' },
+			{ name: 'format-detection', content: 'telephone=no' },
 		],
-		link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+		link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
 	},
 
 	// Global CSS: https://go.nuxtjs.dev/config-css
-	css: ["~/assets/scss/screen.scss", "~/assets/scss-new/screen.scss"],
+	// "~/assets/scss-old/screen.scss",
+	css: [
+		'~/assets/scss/screen.scss',
+		'@fortawesome/fontawesome-svg-core/styles.css',
+	],
 
 	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-	plugins: [],
+	plugins: ['~/plugins/fontawesome.js'],
 
 	// Auto import components: https://go.nuxtjs.dev/config-components
 	components: true,
@@ -31,35 +35,119 @@ export default {
 	// Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
 	buildModules: [
 		// https://go.nuxtjs.dev/typescript
-		"@nuxt/typescript-build",
+		'@nuxt/typescript-build',
 	],
-
 	// Modules: https://go.nuxtjs.dev/config-modules
-	modules: ["@nuxtjs/i18n"],
+	modules: [
+		'@nuxtjs/i18n',
+		'@nuxtjs/auth-next',
+		'@nuxtjs/apollo',
+		// '@nuxtjs/axios',
+	],
 
 	// Build Configuration: https://go.nuxtjs.dev/config-build
 	build: {},
 
 	// ADDED MYSELF:
 	router: {
-		middleware: ["mobile"],
+		middleware: ['mobile'],
 	},
-
+	//auth
+	auth: {
+		redirect: {
+			login: '/login', // User will be redirected to this path if login is required.
+			home: '/profile', // User will be redirected to this path if logged in.
+			logout: '/', // User will be redirected to this path if logged out.
+		},
+		strategies: {
+			local: {
+				token: {
+					property: 'token',
+					global: true,
+				},
+				endpoints: {
+					login: {
+						url: 'http://localhost:4000/login', // 3001/sessions
+						method: 'post',
+						propertyName: 'jwt',
+					},
+					logout: {
+						url: 'http://localhost:4000/logout',
+						method: 'post',
+					},
+					user: {
+						url: 'http://localhost:4000/user',
+						method: 'get',
+						propertyName: 'user',
+					},
+				},
+			},
+			cookie: {
+				cookie: {
+					name: 'jwt',
+				},
+				endpoints: {
+					login: {
+						url: 'http://localhost:4000/login', // 3001/sessions
+						method: 'post',
+						propertyName: 'message',
+					},
+					logout: {
+						url: 'http://localhost:4000/logout',
+						method: 'post',
+					},
+					user: {
+						url: 'http://localhost:4000/user',
+						method: 'get',
+						propertyName: 'data',
+					},
+				},
+			},
+			facebook: {
+				endpoints: {
+					userInfo:
+						'https://graph.facebook.com/v6.0/me?fields=id,name,picture{url}',
+				},
+				clientId: '643924513440800',
+				scope: ['public_profile', 'email'],
+			},
+		},
+	},
 	// internationalization plugin config
 	i18n: {
+		// baseUrl: "https://tania.tours",
+		baseUrl: 'http://localhost:3000/',
 		/* module options */
-		locales: ["en", "ru"],
-		defaultLocale: "en",
+		locales: [
+			{ code: 'en', iso: 'en-US' },
+			{ code: 'ru', iso: 'ru-RU' },
+		],
+		defaultLocale: 'en',
 		vueI18n: {
-			fallbackLocale: "en",
+			fallbackLocale: 'en',
 			messages: {
 				en: {
-					welcome: "Welcome",
+					welcome: 'Welcome',
 				},
 				ru: {
-					welcome: "Добро пожаловать",
+					welcome: 'Добро пожаловать',
 				},
 			},
 		},
 	},
+	head() {
+		return this.$nuxtI18nHead({ addSeoAttributes: true });
+	},
+	// graphql api
+	apollo: {
+		clientConfigs: {
+			default: {
+				httpEndpoint: 'http://localhost:1337/graphql',
+			},
+		},
+	},
+	// rest api
+	// axios: {
+	// 	// proxy: true
+	// },
 };

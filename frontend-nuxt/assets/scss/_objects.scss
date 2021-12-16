@@ -1,91 +1,167 @@
-//OBJECTS
-//only o- classes go here.
-//read more on https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/
+// //Objects – Style rules for elements responsible for layout or structuring.
 
-//Objects
-//class-based selectors which define undecorated design patterns, for example media object known from OOCSS
-.o-section{
-    display: flex;
-    position: relative;
-    // height: calc(100vw/2);
-    height: 100vh;
-    width: 100%;
-    overflow: hidden;
+//whole horizontal section with 2 squares
+.o-section {
+	// border: 5px solid skyblue;
+	// background-color: pink;
+	width: 100vw; //causes hoz overflow
+	max-width: 100%; //fixed hoz overflow
+	min-height: 100vh;
+	// min-width: calc(100vh / 2);
+	// border: 3px solid black;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	// flex-basis: 1;
+}
+
+//a square-styled section of content
+.o-content {
+	display: flex;
+
+	&--empty {
+		flex-grow: 1;
+		// background-color: lightskyblue;
+	}
+
+	&--square {
+		display: flex;
+		// align-items: center;
+		// background-color: lightcoral;
+	}
+
+	&--scroll {
+		flex-grow: 1;
+		// background-color: lightgreen;
+	}
 }
 
 .o-grid {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(8, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-    width: 50%; //vw is too much for some reason idk
-    height: inherit;
-    // padding-left: $width-1_16;
-    border-right: 1px solid rgba(0,0,0,0.2);
+	//grid container
+	display: grid;
+	//8 equal rows and columns
+	grid-template-rows: repeat(8, 1fr);
+	grid-template-columns: repeat(8, 1fr);
+	//0 spacing inbetween them
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+	height: 100vh;
 
-    &--left{
-        padding-left: $width-1_16;
-        // border-left: none;
-        // border-right: 1px solid rgba(0,0,0,0.2);
-    }
+	&__title {
+		grid-area: 3 / 1 / 4 / 9;
+		font-weight: $bold;
+		// font-size: 7.25vw;
+		font-size: 875%;
+		// white-space: nowrap;
+		line-height: 0.8em;
 
-    &__title { 
-        grid-area: 3 / 1 / 5 / 9; 
-        font-weight: $bold;
-        font-size: 7.25vw;
-        // background-color: red;
+		// &--align {
+		// 	position: relative;
+		// 	left: -7px;
+		// 	top: -5.25vh;
+		// }
+	}
 
-        &--align{
-            position: relative;
-            left: -7px;
-            top: -5.25vh;
-        }
-    }
+	&__subtitle {
+		grid-area: 5 / 1 / 6 / 5;
+		font-weight: $medium;
+		// font-size: 1.8125vw;
+		font-size: 220%;
+	}
 
-    &__sub-title { 
-        grid-area: 5 / 1 / 6 / 5;
-        font-weight: $medium;
-        font-size: 1.8125vw;
-        // background-color: green;
-    }
+	&__description {
+		grid-area: 6 / 1 / 9 / 5;
+		// font-size: 1vw;
+		font-size: 100%;
+	}
 
-    &__info{
-        // grid-area: 6 / 1 / 7 / 5;
-        grid-area: 6 / 1 / 9 / 5;
-        font-size: 1vw;
-        // background-color: orange;
-        // z-index: 2;
-    }
+	&__social {
+		grid-area: 5 / 7 / 8 / 8;
+		// font-size: 1.6vw;
+		font-size: 200%;
+	}
 
-    &__links { 
-        grid-area: 7 / 1 / 8 / 5;
-        display: flex;
-        flex-direction: row;
-        align-items: flex-end;
-        justify-content: space-between;
-        font-size: 1.125vw;
-        // background-color: lightseagreen;
-        // z-index: 1;
+	&__links {
+		grid-area: 7 / 1 / 8 / 5;
+		display: flex;
+		flex-direction: row;
+		align-items: flex-end;
+		justify-content: space-between;
+		font-size: 1.125vw;
+		// background-color: lightseagreen;
+		// z-index: 1;
 
-        &--single{
-            justify-content: flex-end;
-        }
-        
-        // a{
-        //     // color: black;
-        // }
-    }
+		&--single {
+			align-items: flex-end;
+		}
+	}
+}
+//mobile view
+@media (max-aspect-ratio: 5/4) {
+	.o-section {
+		flex-wrap: wrap;
+	}
+	.o-content {
+		&--empty {
+			width: 0%;
+			transition: $animate;
+		}
 
-    &__social { 
-        grid-area: 5 / 7 / 9 / 8;
-        display: flex;
-        flex-direction: column;
-        font-size: 1.6vw;
+		&--square {
+			min-height: 100vh;
+			width: 100vw;
+			max-width: 100%;
+			transition: $animate;
+		}
+	}
 
-        a{
-            margin-bottom: 1rem;
-            color: white;
-        }
-    } 
+	.o-grid {
+		&__title {
+			grid-area: 2 / 2 / 5 / 3;
+			writing-mode: vertical-lr;
+			font-size: 7vh;
+		}
+		&__subtitle {
+			grid-area: 5 / 2 / 6 / 6;
+			font-size: 2.5vh;
+		}
+		&__description {
+			grid-area: 6 / 2 / 9 / 6;
+			font-size: 2vh;
+		}
+		&__links {
+			grid-area: 7 / 2 / 8 / 6;
+			font-size: 2vh;
+		}
+		// &__social {
+		// 	grid-area: 5 / 7 / 8 / 8;
+		// }
+	}
+}
+
+//tablet-landscape
+@media (min-aspect-ratio: 5/4) and (max-aspect-ratio: 2/1) {
+	.o-content {
+		&--square {
+			// background-color: orangered;
+			width: 50%;
+			min-width: calc(95vh);
+			max-width: 50vw;
+
+			transition: $animate;
+		}
+	}
+}
+
+//widescreen
+@media (min-aspect-ratio: 2/1) {
+	.o-content {
+		&--square {
+			width: 50%;
+			min-width: calc(100vh);
+			max-width: 50vw;
+
+			transition: $animate;
+		}
+	}
 }

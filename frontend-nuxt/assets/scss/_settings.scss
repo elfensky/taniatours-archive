@@ -1,15 +1,20 @@
 //SETTINGS
-//only $variables come here. Fonts, Colors and other values. 
+//Settings – Variable configurations for things like colors, fonts, sizes, etc…
 //read more on https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/
+//read more on https://developer.helpscout.com/seed/glossary/itcss/
 
-//Settings – used with preprocessors and contain font, colors definitions, etc.
 $font-size: 16px;
 $font-primary: 'Helvetica Neue';
 $font-secondary: Roboto;
 
+$bold: 600;
+$medium: 500;
+$regular: 400;
+
+$font-light: white;
+$font-dark: black;
 
 $color-gray: #bababa;
-
 
 $width-100: 100vw;
 $width-75: 75vw;
@@ -25,10 +30,10 @@ $height-1_4: 25vh;
 $height-1_8: 12.5vh;
 $height-1_16: 6.25vh;
 
-$bold: 600;
-$medium: 500;
-$regular: 400;
+$square-width: calc(100vh);
 
-@mixin random-bgr(){
-    background: rgb(random(255), random(255), random(255));
+$animate: ease all 0.2s;
+
+@mixin random-rgb() {
+	background: rgb(random(255), random(255), random(255));
 }

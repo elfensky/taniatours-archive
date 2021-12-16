@@ -1,5 +1,14 @@
-//Utilities
-//utilities and helper classes with ability to override anything which goes before in the triangle, 
-//eg. hide helper class
+.u-fontcolor {
+	&--light {
+		color: white;
+	}
+}
 
+.u-border {
+	border-right: 1px solid rgba(0, 0, 0, 0.2);
 
+	&--left {
+		border-right: none;
+		border-left: 1px solid rgba(0, 0, 0, 0.2);
+	}
+}

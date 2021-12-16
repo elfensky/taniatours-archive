@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<NavigationMobile />
+		<!-- <NavigationMobile /> -->
 		<nuxt />
 	</div>
 </template>

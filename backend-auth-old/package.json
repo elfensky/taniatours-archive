@@ -1,0 +1,44 @@
+{
+	"name": "webapps-with-node-express",
+	"version": "1.0.0",
+	"description": "auth service for (https://taniatours)",
+	"main": "app.js",
+	"author": "Andrei Lavrenov <andrei@lavrenov.io> (https://lavrenov.io/)",
+	"license": "ISC",
+	"scripts": {
+		"dev": "DEBUG=app,app:* nodemon ./app.js",
+		"debug": "DEBUG=* nodemon ./app.js",
+		"startold": "nodemon ./app.js",
+		"start": "nodemon --exec babel-node --use_strict ./app.js"
+	},
+	"dependencies": {
+		"bcryptjs": "^2.4.3",
+		"chalk": "^4.1.2",
+		"cookie-parser": "^1.4.6",
+		"dotenv": "^10.0.0",
+		"express": "^4.17.1",
+		"express-session": "^1.17.2",
+		"jsonwebtoken": "^8.5.1",
+		"mongodb": "^4.2.1",
+		"mongoose": "^6.0.14",
+		"passport": "^0.5.0",
+		"passport-jwt": "^4.0.0",
+		"passport-local": "^1.0.0"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.16.0",
+		"@babel/core": "^7.16.0",
+		"@babel/node": "^7.16.0",
+		"@babel/preset-env": "^7.16.4",
+		"debug": "^4.3.2",
+		"morgan": "^1.10.0",
+		"nodemon": "^2.0.15"
+	},
+	"nodemonConfig": {
+		"restartable": "rs",
+		"delay": 1000,
+		"env": {
+			"PORT": 4000
+		}
+	}
+}

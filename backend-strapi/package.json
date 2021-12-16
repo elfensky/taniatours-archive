@@ -9,7 +9,9 @@
     "build": "strapi build",
     "strapi": "strapi"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "strapi-provider-email-console": "^0.0.1"
+  },
   "dependencies": {
     "knex": "0.21.18",
     "mysql": "2.18.1",

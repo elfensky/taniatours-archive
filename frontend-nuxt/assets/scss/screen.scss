@@ -6,11 +6,12 @@
 /*------------------------------------*\
   #TOOLS 
 \*------------------------------------*/
+@import "tools";
 
 /*------------------------------------*\
   #GENERIC
 \*------------------------------------*/
-@import "generics.reset";
+@import "generic.reset";
 
 /*------------------------------------*\
   #ELEMENTS
@@ -25,17 +26,7 @@
 /*------------------------------------*\
   #COMPONENTS
 \*------------------------------------*/
-@import "components.nav";
-@import "components.header";
-@import "components.aboutme";
-@import "components.blog";
-@import "components.tours";
-@import "components.contact";
-// @import 'components.footer';
-
-//RESPONSIVE
-@import "components.responsive"; //desktop & tablet scaling
-// @import 'components.mobile'; //phones
+@import "components";
 
 /*------------------------------------*\
   #UTILITIES

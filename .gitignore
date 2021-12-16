@@ -107,3 +107,6 @@ dist
 .tern-port
 backend-mariadb/ib_logfile0
 
+backend-mongodb/journal/WiredTigerPreplog.0000000002
+backend-mongodb/journal/WiredTigerPreplog.0000000001
+backend-mongodb/journal/WiredTigerLog.0000000003
