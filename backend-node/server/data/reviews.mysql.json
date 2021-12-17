@@ -1,0 +1,20 @@
+[
+	{
+		"id": "4e460441-689a-400f-91ad-2be49a78ac44",
+		"userid": "53a66aa4-a0d3-480c-9d4a-85b563fc6beb",
+		"tourid": 1,
+		"language": "en",
+		"fullname": "Jonas De Boeck",
+		"text": "This was the most fun tour ever.",
+		"liked": true
+	},
+	{
+		"id": "84733670-ee1d-4b47-9afc-ed7e2685f036",
+		"userid": "6c2cf961-cbb3-4491-b042-91a9ebcce1ab",
+		"tourid": 1,
+		"language": "en",
+		"fullname": "Bart Kelchtermans",
+		"text": "I really enjoyed myself. Great tour and tourguide.",
+		"liked": true
+	}
+]

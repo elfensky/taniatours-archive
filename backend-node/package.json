@@ -1,0 +1,28 @@
+{
+	"name": "backend-node",
+	"version": "1.0.0",
+	"description": "backend service for taniatours",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "npx tsc && node dist/app.js",
+		"dev": "npx nodemon --watch 'server/**/*' --exec 'ts-node' server/app.ts",
+		"lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
+		"format": "prettier .  --write"
+	},
+	"author": "Andrei Lavrenov <andrei@lavrenov.io> (https://lavrenov.io/)",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/express": "^4.17.13",
+		"eslint": "^8.4.1",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-vue": "^8.2.0",
+		"ts-node": "^10.4.0",
+		"typescript": "^4.5.4"
+	},
+	"dependencies": {
+		"class-transformer": "^0.5.1",
+		"dotenv": "^10.0.0",
+		"express": "^4.17.1"
+	}
+}
