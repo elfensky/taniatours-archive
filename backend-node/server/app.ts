@@ -5,23 +5,22 @@ import dotenv from 'dotenv'
 import reviews from './data/reviews.mysql.json'
 import { Review } from './entities/review'
 import { plainToClass } from 'class-transformer'
-const ReviewController = new ReviewController()
+import birds from './data/birds.json'
+import { Bird } from './entities/bird'
+const allBirds = plainToClass(Bird, birds)
 
 // APP SETUP
 dotenv.config() //configure environment variables
-
-// import { ReviewController } from './controllers/review.controller'
-// const allReviews = plainToClass(Review, reviews)
 
 const app = express(),
 	port = process.env.PORT || 3001
 
 // MIDDLEWARE
-app.use(express.json()) // for parsing application/json
-//nu kan je ook respnse.json({user:'Cassanova'}); doen
+app.use(express.json()) // for parsing application/json //nu kan je ook respnse.json({user:'Cassanova'}); doen
+
 app.use(middlewareDemo)
 
-app.use('/reviews', ReviewController.router)
+// app.use('/reviews', ReviewController.router)
 // app.get('/', (request: Request, response: Response) => {
 // 	response.send(`Welcome, just know: you matter!`)
 // })

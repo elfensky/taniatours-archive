@@ -27,7 +27,10 @@ export default {
 	],
 
 	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-	plugins: ['~/plugins/fontawesome.js'],
+	plugins: [
+		'~/plugins/fontawesome.js',
+		// '~/plugins/firebase.js'
+	],
 
 	// Auto import components: https://go.nuxtjs.dev/config-components
 	components: true,
@@ -40,8 +43,10 @@ export default {
 	// Modules: https://go.nuxtjs.dev/config-modules
 	modules: [
 		'@nuxtjs/i18n',
-		'@nuxtjs/auth-next',
+		// '@nuxtjs/auth-next',
 		'@nuxtjs/apollo',
+		'@nuxtjs/pwa',
+		'@nuxtjs/firebase',
 		// '@nuxtjs/axios',
 	],
 
@@ -50,7 +55,10 @@ export default {
 
 	// ADDED MYSELF:
 	router: {
-		middleware: ['mobile'],
+		middleware: [
+			'mobile',
+			// 'auth'
+		],
 	},
 	//auth
 	auth: {
@@ -135,13 +143,16 @@ export default {
 			},
 		},
 	},
-	head() {
-		return this.$nuxtI18nHead({ addSeoAttributes: true });
-	},
+	// head() {
+	// 	return this.$nuxtI18nHead({ addSeoAttributes: true });
+	// },
 	// graphql api
 	apollo: {
 		clientConfigs: {
 			default: {
+				httpEndpoint: 'http://localhost:1337/graphql',
+			},
+			strapi: {
 				httpEndpoint: 'http://localhost:1337/graphql',
 			},
 		},
@@ -150,4 +161,30 @@ export default {
 	// axios: {
 	// 	// proxy: true
 	// },
+	firebase: {
+		config: {
+			apiKey: 'AIzaSyDDUF1aLkjnjGIeCaIwC_Hz_owLcgBTfmM',
+			authDomain: 'taniatours.firebaseapp.com',
+			projectId: 'taniatours',
+			storageBucket: 'taniatours.appspot.com',
+			messagingSenderId: '679997734789',
+			appId: '1:679997734789:web:b02c9506e7635ff1c10eec',
+			measurementId: 'G-4Q3KD5QL69',
+		},
+		services: {
+			auth: {
+				persistence: 'local', // default
+				initialize: {
+					// onAuthStateChangedMutation:
+					// 	'ON_AUTH_STATE_CHANGED_MUTATION',
+					onAuthStateChangedAction: 'onAuthStateChangedAction',
+					subscribeManually: false,
+				},
+				ssr: false, // default false
+				// emulatorPort: 9099,
+				// emulatorHost: 'http://localhost',
+			},
+			// firestore: true,
+		},
+	},
 };

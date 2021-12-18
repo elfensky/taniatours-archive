@@ -7,6 +7,9 @@ export class Bird {
 	recon?: string[]
 	food?: Record<string, string>
 	see?: string
-}
+	// introduction?: sayHello()
 
-function sayHello(params: void) {}
+	sayHello(params: string) {
+		return 'chirp chirp, ik ben een ' + this.name
+	}
+}

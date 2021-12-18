@@ -6,34 +6,40 @@
 		</div>
 
 		<h1>Default Layout</h1>
-		<h2>CURRENT LOCALE: {{ $i18n.locale }}</h2>
+		<h2>LOCALE: {{ $i18n.locale }}</h2>
+		<nuxt-link to="/">Home</nuxt-link>
+		<nuxt-link to="/profile">Profile</nuxt-link>
+		<nuxt-link to="/auth/logout">Logout</nuxt-link>
 
-		<div v-if="$auth.loggedIn">
-			{{ $auth.user.email }}
-			<button>Logout</button>
-			<v-btn>Logout</v-btn>
-			<!-- <nuxt-link>Logout</nuxt-link> -->
-			<!-- <nuxt-link to="profile">Profile</nuxt-link> -->
-			<!-- <nuxt-link v-if="$auth.admin" to="admin">Admin</nuxt-link> -->
-			<!-- username -->
-			<!-- logout button -->
+		<!-- <h2 v-if="$fire.auth.currentUser != null">
+			USER: 
+		</h2> -->
+
+		<!-- <nuxt-link v-if="$auth.admin" to="admin">Admin</nuxt-link> -->
+		<!-- username -->
+		<!-- logout button -->
+
+		<!-- <div v-if="$fire.auth.currentUser != null">
+			<h2>{{ $fire.auth.currentUser.email }}</h2>
+			<nuxt-link to="/auth/logout">Logout</nuxt-link>
+			<nuxt-link to="/profile">Profile</nuxt-link>
 		</div>
 		<div v-else>
-			<nuxt-link to="login">Login</nuxt-link>
-			<nuxt-link to="signup">Signup</nuxt-link>
-			<nuxt-link to="profile">Profile</nuxt-link>
-		</div>
+			<nuxt-link to="/auth/login">Login</nuxt-link>
+			<nuxt-link to="/auth/signup">Signup</nuxt-link>
+		</div> -->
 	</nav>
 </template>
 
 <script>
-// export default {
-// 	data() {
-// 		return {
-// 			currentLocale: this.$nuxt.$i18n.locale,
-// 		};
-// 	},
-// };
+export default {
+	data() {
+		return {
+			// currentLocale: this.$nuxt.$i18n.locale,
+			// user: this.$fire.auth.currentUser,
+		};
+	},
+};
 </script>
 
 <style scoped>

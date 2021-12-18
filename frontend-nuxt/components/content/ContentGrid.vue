@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import Vue from 'vue'
+import Vue from 'vue';
 
 export default Vue.extend({
 	props: {
@@ -37,14 +37,14 @@ export default Vue.extend({
 		},
 	},
 	data() {
-		return {}
+		return {};
 	},
 	computed: {
 		sectionContent() {
-			console.log(this.content.RichSubtitle)
-			return this.content
+			// console.log(this.content.RichSubtitle)
+			return this.content;
 		},
 	},
 	methods: {},
-})
+});
 </script>
