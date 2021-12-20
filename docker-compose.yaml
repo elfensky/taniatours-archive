@@ -1,22 +1,5 @@
-version: '4'
+version: '3'
 services:
-    # switched to firebase for auth, mongo no longer neccesary
-    # mongo:
-    #     image: mongo
-    #     ports:
-    #         - '27017:27017' #should be removed for production
-    #     volumes:
-    #         - './backend-mongodb:/data/db'
-
-    # mongoexpress:
-    #     image: mongo-express
-    #     ports:
-    #         - '8081:8081'
-    #     links:
-    #         - mongo
-    #     environment:
-    #         - ME_CONFIG_MONGODB_URL=mongodb://mongo:27017
-
     mariadb:
         image: mariadb
         ports:
@@ -29,21 +12,13 @@ services:
             MYSQL_USER: strapi
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
 
-    # adminer:
-    #     image: adminer
-    #     restart: always
-    #     ports:
-    #         - 8080:8080
-    #     depends_on:
-    #         - mariadb
-
-    # phpmyadmin:
-    #     image: phpmyadmin
-    #     restart: always
-    #     ports:
-    #       - 8080:80
-    #     environment:
-    #       - PMA_ARBITRARY=1
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+            - 3002:8080
+        depends_on:
+            - mariadb
 
     strapi:
         image: strapi/strapi

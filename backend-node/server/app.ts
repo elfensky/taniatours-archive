@@ -2,28 +2,66 @@
 import express, { Request, Response } from 'express'
 import { middlewareDemo } from './middleware/demo'
 import dotenv from 'dotenv'
-import reviews from './data/reviews.mysql.json'
-import { Review } from './entities/review'
+
 import { plainToClass } from 'class-transformer'
-import birds from './data/birds.json'
-import { Bird } from './entities/bird'
-const allBirds = plainToClass(Bird, birds)
+// import birds from './data/birds.json'
+// import { Bird } from './entity/bird'
+// const allBirds = plainToClass(Bird, birds)
 
-// APP SETUP
-dotenv.config() //configure environment variables
+//TYPEORM
+import { createDatabase } from 'typeorm-extension'
+import {
+	Connection,
+	ConnectionOptions,
+	createConnection,
+	EntityManager,
+	getConnectionOptions,
+	getManager,
+} from 'typeorm'
+//SEEDER
+import seedDatabase from './seeders/seeder'
 
-const app = express(),
-	port = process.env.PORT || 3001
+//CONTROLLERS
+import { BirdController } from './controllers/bird.controller'
 
-// MIDDLEWARE
-app.use(express.json()) // for parsing application/json //nu kan je ook respnse.json({user:'Cassanova'}); doen
+//we can use await here
+;(async () => {
+	//DATABASE SETUP
+	const connectionOptions: ConnectionOptions = await getConnectionOptions()
+	createDatabase({ ifNotExist: true }, connectionOptions)
+		.then(() => console.log('database has been created'))
+		.then(createConnection)
+		.then(async (connection: Connection) => {
+			// SEED DATABASE
+			seedDatabase(connection)
 
-app.use(middlewareDemo)
+			// APP SETUP
+			dotenv.config() //configure environment variables using .env file
 
-// app.use('/reviews', ReviewController.router)
-// app.get('/', (request: Request, response: Response) => {
-// 	response.send(`Welcome, just know: you matter!`)
-// })
+			const app = express()
+			const port = process.env.PORT || 3001
+
+			// MIDDLEWARE
+			app.use(express.json()) // for parsing application/json //nu kan je ook respnse.json({user:'Cassanova'}); doen
+			app.use(middlewareDemo)
+
+			// ROUTES
+			app.get('/', (request: Request, response: Response) => {
+				response.send(`Welcome, just know: you matter!`)
+			})
+
+			const birdController = new BirdController()
+			app.use('/birds', birdController.router)
+
+			// APP START
+			app.listen(port, () => {
+				console.info(
+					`\nServer 👾 \nListening on http://localhost:${port}/`,
+				)
+			})
+		})
+		.catch((error) => console.error(error))
+})()
 
 // app.post('/', (request: Request, response: Response) => {
 // 	response.send(`POST request`)
@@ -34,8 +72,3 @@ app.use(middlewareDemo)
 // app.delete('/user', (request: Request, response: Response) => {
 // 	response.send(`DELETE at /user`)
 // })
-
-// APP START
-app.listen(port, () => {
-	console.info(`\nServer 👾 \nListening on http://localhost:${port}/`)
-})
