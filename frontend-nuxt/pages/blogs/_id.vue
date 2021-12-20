@@ -41,7 +41,7 @@ export default Vue.extend({
 				query getBlog($id: ID!) {
 					blog(id: $id) {
 						Title
-						ShortDescription
+						Subtitle
 						Content
 						Cover {
 							url
