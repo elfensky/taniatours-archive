@@ -1,5 +1,6 @@
 version: '3'
 services:
+    # DATABASE
     mariadb:
         image: mariadb
         ports:
@@ -19,7 +20,7 @@ services:
             - 3002:8080
         depends_on:
             - mariadb
-
+    # STRAPI (CONTENT API)
     strapi:
         image: strapi/strapi
         environment:
@@ -37,18 +38,22 @@ services:
         depends_on:
             - mariadb
 
-    # express:
-    #     image: elfensky/taniatours-node
-    #     build:
-    #         context: ./backend-node/
-    #         dockerfile: ./Dockerfile  #remove ./ if it doesn't work
-    #     environment:
-    #         NODE_ENV: production
-    #     ports:
-    #         - 3001:3001
-    #     depends_on:
-    #         - strapi
+    # NODEJS+EXPRESS (BOOKING API)
+    express:
+        image: elfensky/taniatours-node
+        build:
+            context: ./backend-node/
+            dockerfile: ./Dockerfile  #remove ./ if it doesn't work
+        env_file:
+            - ./backend-node/ormconfig.production.env
+        environment:
+            NODE_ENV: Production
+        ports:
+            - 3001:3001
+        depends_on:
+            - mariadb
 
+    # NUXT FRONTEND
     # nuxt:
     #     image: elfensky/taniatours-nuxt
     #     build:

@@ -2,11 +2,8 @@
 import express, { Request, Response } from 'express'
 import { middlewareDemo } from './middleware/demo'
 import dotenv from 'dotenv'
-
+import cors from 'cors'
 import { plainToClass } from 'class-transformer'
-// import birds from './data/birds.json'
-// import { Bird } from './entity/bird'
-// const allBirds = plainToClass(Bird, birds)
 
 //TYPEORM
 import { createDatabase } from 'typeorm-extension'
@@ -24,7 +21,15 @@ import seedDatabase from './seeders/seeder'
 //CONTROLLERS
 import { BirdController } from './controllers/bird.controller'
 
+//GRAPHQL
+import { GraphQLSchema } from 'graphql'
+import { buildSchema } from 'type-graphql'
+import { graphqlHTTP } from 'express-graphql'
+//RESOLVERS
+import { UserResolver } from './resolvers/UserResolver'
+
 //we can use await here
+import { ReservationResolver } from './resolvers/ReservationResolver'
 ;(async () => {
 	//DATABASE SETUP
 	const connectionOptions: ConnectionOptions = await getConnectionOptions()
@@ -42,6 +47,7 @@ import { BirdController } from './controllers/bird.controller'
 			const port = process.env.PORT || 3001
 
 			// MIDDLEWARE
+			app.use(cors())
 			app.use(express.json()) // for parsing application/json //nu kan je ook respnse.json({user:'Cassanova'}); doen
 			app.use(middlewareDemo)
 
@@ -52,6 +58,26 @@ import { BirdController } from './controllers/bird.controller'
 
 			const birdController = new BirdController()
 			app.use('/birds', birdController.router)
+
+			//GRAPHQL
+			// GRAPHQL
+			let schema: GraphQLSchema = {} as GraphQLSchema
+
+			await buildSchema({
+				resolvers: [UserResolver, ReservationResolver],
+			}).then((_) => {
+				schema = _
+			})
+
+			// GRAPHQL INIT MIDDLEWARE
+			app.use(
+				'/graphql', // Url, do you want to keep track of a version?
+				graphqlHTTP((request, response) => ({
+					schema: schema,
+					context: { request, response },
+					graphiql: true,
+				})),
+			)
 
 			// APP START
 			app.listen(port, () => {

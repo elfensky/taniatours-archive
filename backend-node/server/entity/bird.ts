@@ -4,6 +4,7 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
 export class Bird {
 	@PrimaryGeneratedColumn('uuid')
 	uuid?: string
+
 	@Column({ unique: true })
 	id?: string
 	@Column({ length: 100 })

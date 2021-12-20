@@ -10,8 +10,8 @@ import { Reservation } from '../entity/reservation'
 
 //DATA
 import birds from './birds.json'
-// import users from './users.json'
-// import registrations from './registrations.json'
+import users from './users.json'
+import reservations from './reservations.json'
 
 const seedDatabase = async (connection: Connection) => {
 	try {
@@ -19,8 +19,14 @@ const seedDatabase = async (connection: Connection) => {
 		const isSeeded = await getRepository(Config).findOne('seeded')
 		//IF NOT SEEDED
 		if (isSeeded === undefined) {
-			const birdsORM = plainToClass(Bird, birds)
-			await connection.manager.save(birdsORM) //deze lijst van vogels in de lijst
+			// const birdsORM = plainToClass(Bird, birds)
+			// await connection.manager.save(birdsORM) //deze lijst van vogels in de lijst
+
+			const usersORM = plainToClass(User, users)
+			await connection.manager.save(usersORM)
+
+			const reservationsORM = plainToClass(Reservation, reservations)
+			await connection.manager.save(reservationsORM)
 
 			//SET SEEDED TO TRUE
 			const configORM = new Config()
