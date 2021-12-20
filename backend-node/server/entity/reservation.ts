@@ -6,7 +6,7 @@ import { User } from './user'
 @InputType('ReservationsInput')
 @Entity('reservations')
 export class Reservation {
-	@Field(() => ID)
+	@Field({ nullable: true })
 	@PrimaryGeneratedColumn('uuid')
 	uuid?: string
 
@@ -20,11 +20,11 @@ export class Reservation {
 	@Column()
 	tourid!: number
 
-	@Field()
+	@Field({ nullable: true })
 	@Column('datetime')
 	requested_datetime?: Date = new Date()
 
-	@Field()
+	@Field({ nullable: true })
 	@Column('datetime')
 	order_datetime?: Date = new Date()
 }

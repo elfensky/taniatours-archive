@@ -21,6 +21,8 @@ export default Vue.extend({
 					'tours',
 					'tour',
 					'contact',
+					'color--solid',
+					'color--transparent',
 				].includes(value);
 			},
 		},

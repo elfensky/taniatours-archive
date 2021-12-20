@@ -36,6 +36,7 @@ export default Vue.extend({
 		this.id;
 	},
 	apollo: {
+		$client: 'strapi',
 		blog: {
 			query: gql`
 				query getBlog($id: ID!) {

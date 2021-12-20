@@ -47,6 +47,11 @@
 	grid-row-gap: 0px;
 	height: 100vh;
 
+	padding-left: 100px;
+	&--right {
+		padding-left: 0;
+	}
+
 	&__title {
 		grid-area: 3 / 1 / 4 / 9;
 		font-weight: $bold;
@@ -63,7 +68,8 @@
 	}
 
 	&__subtitle {
-		grid-area: 5 / 1 / 6 / 5;
+		// grid-area: 5 / 1 / 6 / 5;
+		grid-area: 5/1/6/4;
 		font-weight: $medium;
 		// font-size: 1.8125vw;
 		font-size: 220%;
@@ -93,6 +99,17 @@
 
 		&--single {
 			align-items: flex-end;
+		}
+	}
+
+	&__content {
+		&__title {
+			grid-area: 5 / 7 / 6 / 5;
+			font-size: 220%;
+		}
+		&__text {
+			grid-area: 6 / 5 / 8 / 8;
+			font-size: 1.75vh;
 		}
 	}
 }
@@ -139,6 +156,8 @@
 	}
 
 	.o-grid {
+		padding-left: 0;
+
 		&__title {
 			grid-area: 2 / 2 / 5 / 3;
 			writing-mode: vertical-lr;
@@ -156,6 +175,16 @@
 			grid-area: 7 / 2 / 8 / 6;
 			font-size: 2vh;
 		}
+		// &__content {
+		// 	&__title {
+		// 		grid-area: 7 / 2 / 8 / 6;
+		// 		font-size: 2vh;
+		// 	}
+		// 	&__links {
+		// 		grid-area: 7 / 2 / 8 / 6;
+		// 		font-size: 2vh;
+		// 	}
+		// }
 		// &__social {
 		// 	grid-area: 5 / 7 / 8 / 8;
 		// }

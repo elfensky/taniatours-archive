@@ -75,11 +75,14 @@ export default {
 	//graphql
 	apollo: {
 		clientConfigs: {
-			default: {
-				httpEndpoint: 'http://localhost:1337/graphql',
-			},
+			// default: {
+			// 	httpEndpoint: 'http://localhost:1337/graphql',
+			// },
 			strapi: {
 				httpEndpoint: 'http://localhost:1337/graphql',
+			},
+			express: {
+				httpEndpoint: 'http://localhost:3001/graphql',
 			},
 		},
 	},

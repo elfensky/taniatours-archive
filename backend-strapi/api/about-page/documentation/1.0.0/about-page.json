@@ -1,12 +1,12 @@
 {
   "paths": {
-    "/home-page": {
+    "/about-page": {
       "get": {
         "deprecated": false,
-        "description": "Find all the home-page's records",
+        "description": "Find all the about-page's records",
         "responses": {
           "200": {
-            "description": "Retrieve home-page document(s)",
+            "description": "Retrieve about-page document(s)",
             "content": {
               "application/json": {
                 "schema": {
@@ -52,7 +52,7 @@
         },
         "summary": "",
         "tags": [
-          "Home-page"
+          "About-page"
         ],
         "parameters": [
           {
@@ -195,10 +195,10 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Update a single home-page record",
+        "description": "Update a single about-page record",
         "responses": {
           "200": {
-            "description": "Retrieve home-page document(s)",
+            "description": "Retrieve about-page document(s)",
             "content": {
               "application/json": {
                 "schema": {
@@ -244,7 +244,7 @@
         },
         "summary": "",
         "tags": [
-          "Home-page"
+          "About-page"
         ],
         "requestBody": {
           "description": "",
@@ -252,7 +252,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewHome-page"
+                "$ref": "#/components/schemas/NewAbout-page"
               }
             }
           }
@@ -261,10 +261,10 @@
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a single home-page record",
+        "description": "Delete a single about-page record",
         "responses": {
           "200": {
-            "description": "deletes a single home-page based on the ID supplied",
+            "description": "deletes a single about-page based on the ID supplied",
             "content": {
               "application/json": {
                 "schema": {
@@ -307,7 +307,7 @@
         },
         "summary": "",
         "tags": [
-          "Home-page"
+          "About-page"
         ],
         "parameters": []
       }
@@ -315,7 +315,7 @@
   },
   "components": {
     "schemas": {
-      "Home-page": {
+      "About-page": {
         "required": [
           "id"
         ],
@@ -323,105 +323,20 @@
           "id": {
             "type": "string"
           },
-          "Header": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "Title": {
-                "type": "string"
-              },
-              "Subtitle": {
-                "type": "string"
-              },
-              "Description": {
-                "type": "string"
-              }
-            }
+          "Title": {
+            "type": "string"
           },
-          "About": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "Title": {
-                "type": "string"
-              },
-              "Subtitle": {
-                "type": "string"
-              },
-              "Description": {
-                "type": "string"
-              }
-            }
+          "Subtitle": {
+            "type": "string"
           },
-          "Blog": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "Title": {
-                "type": "string"
-              },
-              "Subtitle": {
-                "type": "string"
-              },
-              "Description": {
-                "type": "string"
-              }
-            }
+          "Description": {
+            "type": "string"
           },
-          "Tours": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "Title": {
-                "type": "string"
-              },
-              "Subtitle": {
-                "type": "string"
-              },
-              "Description": {
-                "type": "string"
-              }
-            }
+          "ContentTitle": {
+            "type": "string"
           },
-          "Contact": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "Title": {
-                "type": "string"
-              },
-              "Subtitle": {
-                "type": "string"
-              },
-              "Description": {
-                "type": "string"
-              }
-            }
+          "ContentText": {
+            "type": "string"
           },
           "Cover": {
             "required": [
@@ -500,20 +415,20 @@
                 "id": {
                   "type": "string"
                 },
-                "Header": {
-                  "type": "component"
+                "Title": {
+                  "type": "string"
                 },
-                "About": {
-                  "type": "component"
+                "Subtitle": {
+                  "type": "string"
                 },
-                "Blog": {
-                  "type": "component"
+                "Description": {
+                  "type": "string"
                 },
-                "Tours": {
-                  "type": "component"
+                "ContentTitle": {
+                  "type": "string"
                 },
-                "Contact": {
-                  "type": "component"
+                "ContentText": {
+                  "type": "string"
                 },
                 "Cover": {
                   "type": "string"
@@ -548,107 +463,22 @@
           }
         }
       },
-      "NewHome-page": {
+      "NewAbout-page": {
         "properties": {
-          "Header": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "Title": {
-                "type": "string"
-              },
-              "Subtitle": {
-                "type": "string"
-              },
-              "Description": {
-                "type": "string"
-              }
-            }
+          "Title": {
+            "type": "string"
           },
-          "About": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "Title": {
-                "type": "string"
-              },
-              "Subtitle": {
-                "type": "string"
-              },
-              "Description": {
-                "type": "string"
-              }
-            }
+          "Subtitle": {
+            "type": "string"
           },
-          "Blog": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "Title": {
-                "type": "string"
-              },
-              "Subtitle": {
-                "type": "string"
-              },
-              "Description": {
-                "type": "string"
-              }
-            }
+          "Description": {
+            "type": "string"
           },
-          "Tours": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "Title": {
-                "type": "string"
-              },
-              "Subtitle": {
-                "type": "string"
-              },
-              "Description": {
-                "type": "string"
-              }
-            }
+          "ContentTitle": {
+            "type": "string"
           },
-          "Contact": {
-            "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "Title": {
-                "type": "string"
-              },
-              "Subtitle": {
-                "type": "string"
-              },
-              "Description": {
-                "type": "string"
-              }
-            }
+          "ContentText": {
+            "type": "string"
           },
           "localizations": {
             "type": "array",

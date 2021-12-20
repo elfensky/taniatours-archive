@@ -3,22 +3,32 @@
 		<LayoutSection id="tours">
 			<LayoutSquare v-if="!this.$apollo.queries.tour.loading" name="tour">
 				<ContentGrid :content="tour"></ContentGrid>
-				<div style="margin-top: 10vh">
-					<button>Place a reservation</button>
-					<form action="">
+				<div v-if="$nuxt.$fire.auth.currentUser" style="margin-top: 10vh">
+					<!-- <button>Place a reservation</button> -->
+					<form class="c-form" @submit.prevent="placeReservation">
+						<label for="datetime" class="c-label">Date & Time</label>
 						<input
+							class="c-input"
 							type="datetime-local"
-							id="birthdaytime"
-							name="birthdaytime" />
+							id="datetime"
+							name="datetime"
+							v-model="formData.reservartionDate"
+							required />
+
+						<label for="peopleAmount" class="c-label">How many people</label>
 						<input
+							class="c-input"
 							type="number"
-							id="people"
-							name="people"
+							id="peopleAmount"
+							name="peopleAmount"
 							min="1"
-							max="10" />
+							max="10"
+							v-model="formData.amountOfPeople"
+							required />
 						<input type="submit" value="Place Reservation" />
 					</form>
 				</div>
+				<div v-else>You must login to book a tour</div>
 			</LayoutSquare>
 		</LayoutSection>
 	</main>
@@ -28,30 +38,62 @@
 import Vue from 'vue';
 import gql from 'graphql-tag';
 
+const CREATE_RESERVATION = gql`
+	mutation CreateReservation($data: ReservationsInput!) {
+		createReservation(data: $data) {
+			uuid
+			userid
+			tourid
+			requested_datetime
+			order_datetime
+		}
+	}
+`;
+
 export default Vue.extend({
 	data() {
 		return {
 			currentLocale: this.$nuxt.$i18n.locale,
-			homePage: {},
 			id: this.$route.params.id,
-			// currentData: awaitthis.apollo.homePage,
+			formData: {
+				currentDate: new Date().toISOString(),
+				reservartionDate: '2022-01-01T12:00',
+				amountOfPeople: 1,
+			},
 		};
 	},
 	mounted() {
-		// this.startAnimations();
 		this.currentLocale;
-		this.id;
+		this.id = this.$route.params.id;
 	},
 	layout: ({ isMobile }) => (isMobile ? 'mobile' : 'default'),
-	created() {
-		// this.currentLocale;
+	methods: {
+		async placeReservation() {
+			// console.log(this.formData.reservartionDate);
+			// console.log(this.$nuxt.$fire.auth.currentUser.uid);
+			// console.log(typeof parseInt(this.id));
+			// console.log(this.formData.currentDate);
+
+			this.$apollo.mutate({
+				client: 'express',
+				mutation: CREATE_RESERVATION,
+				variables: {
+					data: {
+						userid: this.$nuxt.$fire.auth.currentUser.uid,
+						tourid: parseInt(this.id),
+						requested_datetime: this.formData.reservartionDate,
+						order_datetime: this.formData.currentDate,
+					},
+				},
+			});
+		},
 	},
-	methods: {},
 	updated() {
 		this.currentLocale;
 		this.id;
 	},
 	apollo: {
+		$client: 'strapi',
 		tour: {
 			query: gql`
 				query getTour($id: ID!) {
@@ -75,22 +117,3 @@ export default Vue.extend({
 	},
 });
 </script>
-
-<style scoped>
-/* .container {
-	display: flex;
-	justify-content: space-between;
-	line-height: 1.5;
-}
-article * {
-	margin-bottom: 1rem;
-}
-aside {
-	min-width: 280px;
-	max-width: 280px;
-	padding-left: 2rem;
-}
-.title {
-	font-size: 2rem;
-} */
-</style>

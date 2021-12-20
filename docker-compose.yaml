@@ -13,13 +13,6 @@ services:
             MYSQL_USER: strapi
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
 
-    adminer:
-        image: adminer
-        restart: always
-        ports:
-            - 3002:8080
-        depends_on:
-            - mariadb
     # STRAPI (CONTENT API)
     strapi:
         image: strapi/strapi
@@ -43,7 +36,7 @@ services:
         image: elfensky/taniatours-node
         build:
             context: ./backend-node/
-            dockerfile: ./Dockerfile  #remove ./ if it doesn't work
+            dockerfile: ./Dockerfile #remove ./ if it doesn't work
         env_file:
             - ./backend-node/ormconfig.production.env
         environment:
@@ -54,12 +47,12 @@ services:
             - mariadb
 
     # NUXT FRONTEND
-    # nuxt:
-    #     image: elfensky/taniatours-nuxt
-    #     build:
-    #         context: ./frontend-nuxt/
-    #         dockerfile: ./Dockerfile
-    #     ports:
-    #         - 3000:9000
-    #     depends_on:
-    #         - strapi
+    nuxt:
+        image: elfensky/taniatours-nuxt
+        build:
+            context: ./frontend-nuxt/
+            dockerfile: ./Dockerfile
+        ports:
+            - 3000:3000
+        depends_on:
+            - strapi

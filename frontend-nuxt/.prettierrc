@@ -6,5 +6,5 @@
 	"semi": true,
 	"trailingComma": "all",
 	"bracketSameLine": true,
-	"printWidth": 81
+	"printWidth": 90
 }

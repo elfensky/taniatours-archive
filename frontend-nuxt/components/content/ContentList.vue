@@ -7,7 +7,7 @@
 				:key="item.id"
 				class="o-article c-blog__post">
 				<h3 class="c-blog__post__title">{{ item.Title }}</h3>
-				<h4 class="c-blog__post__info">{{ item.ShortDescription }}</h4>
+				<h4 class="c-blog__post__info">{{ item.Subtitle }}</h4>
 				<p class="c-blog__post__info">{{ item.Content }}</p>
 				<!-- <nuxt-link class="c-link" :to="'/blogs/' + item.id"
 				>Readmore</nuxt-link

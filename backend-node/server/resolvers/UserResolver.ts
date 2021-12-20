@@ -17,7 +17,7 @@ export class UserResolver {
 		const foundUser = await this.manager
 			.findOneOrFail(User, { uid: uid })
 			.catch((e) => {
-				throw new Error('Could not find that order.')
+				throw new Error("Couldn't find user.")
 			})
 
 		return foundUser

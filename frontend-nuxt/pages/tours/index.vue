@@ -44,6 +44,7 @@ export default Vue.extend({
 		this.currentLocale;
 	},
 	apollo: {
+		$client: 'strapi',
 		homePage: {
 			query: gql`
 				query getHomePage($locale: String) {

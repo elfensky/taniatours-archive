@@ -10,6 +10,14 @@
 		<p class="o-grid__description">
 			{{ sectionContent.Description }}
 		</p>
+
+		<h3 class="o-grid__content__title" :v-if="sectionContent.ContentTitle">
+			{{ sectionContent.ContentTitle }}
+		</h3>
+		<p class="o-grid__content__text" :v-if="sectionContent.ContentText">
+			{{ sectionContent.ContentText }}
+		</p>
+
 		<slot></slot>
 	</div>
 </template>

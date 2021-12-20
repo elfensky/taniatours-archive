@@ -8,10 +8,11 @@
 		<LayoutSection id="header">
 			<VideoBackground />
 			<LayoutEmpty />
-			<LayoutSquare
-				v-if="!this.$apollo.queries.homePage.loading"
-				name="header">
-				<ContentGrid :content="homePage.Header" :social="true">
+			<LayoutSquare v-if="!this.$apollo.queries.homePage.loading" name="header">
+				<ContentGrid
+					class="o-grid--right"
+					:content="homePage.Header"
+					:social="true">
 					<ContentLinks
 						:links="[
 							{ text: 'About me', path: '/', hash: '#about' },
@@ -24,33 +25,26 @@
 
 		<!-- ABOUT -->
 		<LayoutSection id="about">
-			<LayoutSquare
-				v-if="!this.$apollo.queries.homePage.loading"
-				name="about">
+			<LayoutSquare v-if="!this.$apollo.queries.homePage.loading" name="about">
 				<ContentGrid :content="homePage.About">
-					<ContentLinks
-						:links="[
-							{ text: 'Learn more', path: '/', hash: '#about' },
-						]" />
+					<ContentLinks :links="[{ text: 'Learn more', path: '/about' }]" />
 				</ContentGrid>
 			</LayoutSquare>
-			<!-- <LayoutSquare></LayoutSquare> -->
+
+			<LayoutEmpty v-if="!this.$apollo.queries.homePage.loading">
+				<ContentImage :src="'http://localhost:1337' + homePage.Cover.url" />
+			</LayoutEmpty>
 		</LayoutSection>
 
 		<!-- BLOG -->
 		<LayoutSection id="blog">
-			<LayoutSquare
-				v-if="!this.$apollo.queries.homePage.loading"
-				name="blog">
+			<LayoutSquare v-if="!this.$apollo.queries.homePage.loading" name="blog">
 				<ContentGrid :content="homePage.Blog">
-					<ContentLinks
-						:links="[{ text: 'Show All', path: '/blogs' }]" />
+					<!-- <ContentLinks :links="[{ text: 'Show All', path: '/blogs' }]" /> -->
 				</ContentGrid>
 			</LayoutSquare>
 
-			<LayoutScroll
-				v-if="!this.$apollo.queries.blogs.loading"
-				name="c-blog__list">
+			<LayoutScroll v-if="!this.$apollo.queries.blogs.loading" name="c-blog__list">
 				<ContentList type="blogs" :content="blogs" />
 			</LayoutScroll>
 		</LayoutSection>
@@ -59,25 +53,21 @@
 		<LayoutSection id="tours">
 			<LayoutSquare
 				v-if="!this.$apollo.queries.homePage.loading"
-				name="tours">
-				<ContentGrid :content="homePage.Tours">
-					<ContentLinks
-						:links="[{ text: 'Show All', path: '/tours' }]" />
+				name="tours"
+				id="tours_container">
+				<ContentGrid :content="homePage.Tours" id="tours_grid">
+					<ContentLinks :links="[{ text: 'Show All', path: '/tours' }]" />
 				</ContentGrid>
 			</LayoutSquare>
 
-			<LayoutScroll
-				v-if="!this.$apollo.queries.tours.loading"
-				name="list__tour">
+			<LayoutScroll v-if="!this.$apollo.queries.tours.loading" name="list__tour">
 				<ContentList type="tours" :content="tours" />
 			</LayoutScroll>
 		</LayoutSection>
 
 		<!-- CONTACT -->
 		<LayoutSection id="contact">
-			<LayoutSquare
-				v-if="!this.$apollo.queries.homePage.loading"
-				name="contact">
+			<LayoutSquare v-if="!this.$apollo.queries.homePage.loading" name="contact">
 				<ContentGrid :content="homePage.Contact">
 					<!-- <ContentLinks
 						:links="[
@@ -88,6 +78,8 @@
 				</ContentGrid>
 			</LayoutSquare>
 		</LayoutSection>
+
+		<!-- <span v-if="this."></span> -->
 	</main>
 </template>
 
@@ -106,6 +98,7 @@ export default Vue.extend({
 	data() {
 		return {
 			currentLocale: this.$nuxt.$i18n.locale,
+			scriptSource: '~/assets/scripts/scroll.js',
 			// homePage: {},
 			// currentData: awaitthis.apollo.homePage,
 		};
@@ -113,20 +106,60 @@ export default Vue.extend({
 	mounted() {
 		// this.startAnimations();
 		this.currentLocale;
+		this.scrollLock();
 	},
 	layout: ({ isMobile }) => (isMobile ? 'mobile' : 'default'),
 	created() {
 		// this.currentLocale;
 	},
-	methods: {},
+	methods: {
+		scrollLock() {
+			var h = Math.max(
+				document.documentElement.clientHeight,
+				window.innerHeight || 0,
+			);
+			var h2 = (h / 3) * 2;
+			// var nav = document.getElementsByTagName('nav')[0];
+			// // console.log(nav);
+			// var header = document.getElementById('video');
+			var blog = document.getElementById('blog');
+			var tours_grid = document.getElementById('tours_grid');
+
+			var tours_container = document.getElementById('tours_container');
+			// var contact = document.getElementById('contact');
+			// var tours_grid_scroll = 0;
+			console.log('gotdata');
+
+			window.addEventListener('scroll', function () {
+				// let scrollpos = window.scrollY;
+
+				//FIXED TOURS
+				if (window.scrollY > blog.offsetTop + blog.offsetHeight) {
+					// console.log("You've scrolled past the blog");
+					tours_grid.classList.add('c-tours__grid--fixed');
+					tours_container.classList.add('c-tours__container--fixed');
+				}
+
+				if (window.scrollY < blog.offsetTop + blog.offsetHeight) {
+					// console.log("You've scrolled before the blog");
+					tours_grid.classList.remove('c-tours__grid--fixed');
+					tours_container.classList.remove('c-tours__container--fixed');
+				}
+			});
+		},
+	},
 	updated() {
 		this.currentLocale;
 	},
 	apollo: {
+		$client: 'strapi',
 		homePage: {
 			query: gql`
 				query getHomePage($locale: String) {
 					homePage(locale: $locale) {
+						Cover {
+							url
+						}
 						Header {
 							Title
 							Subtitle
@@ -168,7 +201,7 @@ export default Vue.extend({
 					blogs(locale: $locale, limit: 2) {
 						id
 						Title
-						ShortDescription
+						Subtitle
 						Content
 					}
 				}

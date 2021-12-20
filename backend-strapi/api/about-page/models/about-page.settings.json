@@ -1,8 +1,8 @@
 {
   "kind": "singleType",
-  "collectionName": "home_pages",
+  "collectionName": "about_pages",
   "info": {
-    "name": "HomePage",
+    "name": "AboutPage",
     "description": ""
   },
   "options": {
@@ -16,50 +16,40 @@
     }
   },
   "attributes": {
-    "Header": {
-      "type": "component",
-      "repeatable": false,
-      "component": "general.square-section",
+    "Title": {
+      "type": "string",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       }
     },
-    "About": {
-      "type": "component",
-      "repeatable": false,
-      "component": "general.square-section",
+    "Subtitle": {
+      "type": "string",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       }
     },
-    "Blog": {
-      "type": "component",
-      "repeatable": false,
-      "component": "general.square-section",
+    "Description": {
+      "type": "string",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       }
     },
-    "Tours": {
-      "type": "component",
-      "repeatable": false,
-      "component": "general.square-section",
+    "ContentTitle": {
+      "type": "string",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       }
     },
-    "Contact": {
-      "type": "component",
-      "repeatable": false,
-      "component": "general.square-section",
+    "ContentText": {
+      "type": "richtext",
       "pluginOptions": {
         "i18n": {
           "localized": true

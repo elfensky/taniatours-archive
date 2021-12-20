@@ -1,17 +1,5 @@
-# FROM node:lts-alpine
-# ENV NODE_ENV=production
-# WORKDIR /usr/src/app
-# COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
-# RUN npm install --production --silent && mv node_modules ../
-# COPY . .
-# EXPOSE 3001
-# RUN chown -R node /usr/src/app
-# USER node
-# CMD ["npm", "start"]
-
-
 # start with a node alpine base image
-FROM node:16.13.0-alpine3.14
+FROM node:16.9.1-alpine
 # FROM node:lts as builder
 
 # create destination directory

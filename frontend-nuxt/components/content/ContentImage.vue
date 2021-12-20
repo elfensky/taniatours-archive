@@ -1,11 +1,12 @@
 <template>
 	<div class="o-content o-content--image">
-		<img :src="src" :srcset="srcset" :sizes="sizes" :alt="alt" />
+		<img class="c-image" :src="src" />
+		<!-- :srcset="srcset" :sizes="sizes" :alt="alt" -->
 	</div>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 
 //pass image object (from api) instead?
 export default Vue.extend({
@@ -16,15 +17,15 @@ export default Vue.extend({
 		},
 		srcset: {
 			type: String,
-			required: true,
+			required: false,
 		},
 		sizes: {
 			type: String,
-			required: true,
+			required: false,
 		},
 		alt: {
 			type: String,
-			required: true,
+			required: false,
 		},
 	},
 });

@@ -20,10 +20,10 @@ RUN npm run build
 
 # set environment variables for nuxt app
 ENV NUXT_HOST 0.0.0.0
-ENV NUXT_PORT=9000
+ENV NUXT_PORT=3000
 
 # expose port 9000 from the container to OS
-EXPOSE 9000
+EXPOSE 3000
 
 # start nuxt app
 # RUN npm run start 
