@@ -1,62 +1,83 @@
 <template>
-	<div class="container">
-		<article>
-			<h1 class="title">{{ post.title }}</h1>
-			<p>{{ post.content }}</p>
-		</article>
-		<aside>
-			<h3>Posts you might enjoy</h3>
-			<ul>
-				<li :v-for="related in relatedPosts">
-					<nuxt-link
-						:to="{ name: 'posts-id', params: { id: related.id } }"
-					>
-						{{ related.title }}
-					</nuxt-link>
-				</li>
-			</ul>
-		</aside>
-	</div>
+	<main class="o-main">
+		<LayoutSection id="tours">
+			<LayoutSquare v-if="!this.$apollo.queries.tour.loading" name="tour">
+				<ContentGrid :content="tour"></ContentGrid>
+				<div style="margin-top: 10vh">
+					<button>Place a reservation</button>
+					<form action="">
+						<input
+							type="datetime-local"
+							id="birthdaytime"
+							name="birthdaytime" />
+						<input
+							type="number"
+							id="people"
+							name="people"
+							min="1"
+							max="10" />
+						<input type="submit" value="Place Reservation" />
+					</form>
+				</div>
+			</LayoutSquare>
+		</LayoutSection>
+	</main>
 </template>
 
 <script>
-export default {
-	head() {
-		return {
-			title: this.post.title,
-			meta: [
-				{ name: "twitter:title", content: this.post.title },
-				{ name: "twitter:description", content: this.post.content },
-				{
-					name: "twitter:image",
-					content: "https://i.imgur.com/UYP2umJ.png",
-				},
-				{ name: "twitter:card", content: "summary_large_image" },
-			],
-		};
-	},
+import Vue from 'vue';
+import gql from 'graphql-tag';
+
+export default Vue.extend({
 	data() {
 		return {
+			currentLocale: this.$nuxt.$i18n.locale,
+			homePage: {},
 			id: this.$route.params.id,
+			// currentData: awaitthis.apollo.homePage,
 		};
 	},
-	computed: {
-		post() {
-			return this.$store.state.posts.all.find(
-				(post) => post.id === this.id
-			);
-		},
-		relatedPosts() {
-			return this.$store.state.posts.all.filter(
-				(post) => post.id !== this.id
-			);
+	mounted() {
+		// this.startAnimations();
+		this.currentLocale;
+		this.id;
+	},
+	layout: ({ isMobile }) => (isMobile ? 'mobile' : 'default'),
+	created() {
+		// this.currentLocale;
+	},
+	methods: {},
+	updated() {
+		this.currentLocale;
+		this.id;
+	},
+	apollo: {
+		tour: {
+			query: gql`
+				query getTour($id: ID!) {
+					tour(id: $id) {
+						Title
+						LengthInMinutes
+						Description
+						Cover {
+							url
+						}
+					}
+				}
+			`,
+			variables() {
+				return {
+					id: this.$route.params.id,
+				};
+			},
+			prefetch: true,
 		},
 	},
-};
+});
 </script>
 
 <style scoped>
-.container {
+/* .container {
 	display: flex;
 	justify-content: space-between;
 	line-height: 1.5;
@@ -71,5 +92,5 @@ aside {
 }
 .title {
 	font-size: 2rem;
-}
+} */
 </style>

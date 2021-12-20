@@ -1,76 +1,44 @@
 <template>
-	<div class="container">
-		<!-- HEADER -->
-		<LayoutSection id="header">
-			<!-- <LayoutEmpty /> -->
-			<LayoutSquare name="cover">
-				<!-- v-if="!this.$apollo.queries.homePage.loading"
-				name="header" -->
-				<ContentGrid :content="blog" :social="false">
-					<!-- <ContentLinks
-						:links="[
-							{ text: 'About me', path: '/', hash: '#about' },
-							{ text: 'Tours', path: '/', hash: '#tours' },
-						]" />
-					<ContentSocial /> -->
-				</ContentGrid>
+	<main class="o-main">
+		<LayoutSection id="blogs">
+			<LayoutSquare v-if="!this.$apollo.queries.blog.loading" name="blog">
+				<ContentGrid :content="blog"></ContentGrid>
 			</LayoutSquare>
 		</LayoutSection>
-		<!-- 
-		<h1>A blog Title</h1>
-		<h2>my id is {{ id }}</h2> -->
-		<!-- <article>
-			<h1 class="title">{{ post.title }}</h1>
-			<p>{{ post.content }}</p>
-		</article>
-		<aside>
-			<h3>Posts you might enjoy</h3>
-			<ul>
-				<li :v-for="related in relatedPosts">
-					<nuxt-link
-						:to="{ name: 'posts-id', params: { id: related.id } }">
-						{{ related.title }}
-					</nuxt-link>
-				</li>
-			</ul>
-		</aside> -->
-	</div>
+	</main>
 </template>
 
 <script>
-import Vue from 'vue'; //when used with ts, it fucks up Apollo
+import Vue from 'vue';
 import gql from 'graphql-tag';
 
 export default Vue.extend({
-	// head() {
-	// 	return {
-	// 		title: this.post.title,
-	// 		meta: [
-	// 			{ name: "twitter:title", content: this.post.title },
-	// 			{ name: "twitter:description", content: this.post.content },
-	// 			{
-	// 				name: "twitter:image",
-	// 				content: "https://i.imgur.com/UYP2umJ.png",
-	// 			},
-	// 			{ name: "twitter:card", content: "summary_large_image" },
-	// 		],
-	// 	};
-	// },
 	data() {
 		return {
 			currentLocale: this.$nuxt.$i18n.locale,
+			homePage: {},
 			id: this.$route.params.id,
+			// currentData: awaitthis.apollo.homePage,
 		};
 	},
 	mounted() {
 		// this.startAnimations();
 		this.currentLocale;
+		this.id;
 	},
 	layout: ({ isMobile }) => (isMobile ? 'mobile' : 'default'),
+	created() {
+		// this.currentLocale;
+	},
+	methods: {},
+	updated() {
+		this.currentLocale;
+		this.id;
+	},
 	apollo: {
 		blog: {
 			query: gql`
-				query getBlogPost($id: ID!) {
+				query getBlog($id: ID!) {
 					blog(id: $id) {
 						Title
 						ShortDescription
@@ -89,23 +57,11 @@ export default Vue.extend({
 			prefetch: true,
 		},
 	},
-	// computed: {
-	// 	post() {
-	// 		return this.$store.state.posts.all.find(
-	// 			(post) => post.id === this.id
-	// 		);
-	// 	},
-	// 	relatedPosts() {
-	// 		return this.$store.state.posts.all.filter(
-	// 			(post) => post.id !== this.id
-	// 		);
-	// 	},
-	// },
 });
 </script>
 
 <style scoped>
-.container {
+/* .container {
 	display: flex;
 	justify-content: space-between;
 	line-height: 1.5;
@@ -120,5 +76,5 @@ aside {
 }
 .title {
 	font-size: 2rem;
-}
+} */
 </style>

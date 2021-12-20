@@ -19,6 +19,7 @@ export default Vue.extend({
 					'blog',
 					'blogs',
 					'tours',
+					'tour',
 					'contact',
 				].includes(value);
 			},

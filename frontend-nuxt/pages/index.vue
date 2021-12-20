@@ -106,7 +106,7 @@ export default Vue.extend({
 	data() {
 		return {
 			currentLocale: this.$nuxt.$i18n.locale,
-			homePage: {},
+			// homePage: {},
 			// currentData: awaitthis.apollo.homePage,
 		};
 	},
