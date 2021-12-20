@@ -13,9 +13,14 @@ export default Vue.extend({
 			type: String,
 			required: true,
 			validator: function (value: string) {
-				return ['header', 'about', 'blog', 'tours', 'contact'].includes(
-					value,
-				);
+				return [
+					'header',
+					'about',
+					'blog',
+					'blogs',
+					'tours',
+					'contact',
+				].includes(value);
 			},
 		},
 		position: {

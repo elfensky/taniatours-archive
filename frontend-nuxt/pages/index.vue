@@ -1,8 +1,8 @@
 <template>
 	<main class="o-main">
-		<div id="locale" style="text-align: right; position: absolute">
+		<!-- <div id="locale" style="text-align: right; position: absolute">
 			{{ $i18n.locale }}
-		</div>
+		</div> -->
 
 		<!-- HEADER -->
 		<LayoutSection id="header">
@@ -44,12 +44,49 @@
 				name="blog">
 				<ContentGrid :content="homePage.Blog">
 					<ContentLinks
-						:links="[
-							{ text: 'Learn more', path: '/', hash: '#about' },
-						]" />
+						:links="[{ text: 'Show All', path: '/blogs' }]" />
 				</ContentGrid>
 			</LayoutSquare>
-			<LayoutEmpty />
+
+			<LayoutScroll
+				v-if="!this.$apollo.queries.blogs.loading"
+				name="c-blog__list">
+				<ContentList type="blogs" :content="blogs" />
+			</LayoutScroll>
+		</LayoutSection>
+
+		<!-- TOURS -->
+		<LayoutSection id="tours">
+			<LayoutSquare
+				v-if="!this.$apollo.queries.homePage.loading"
+				name="tours">
+				<ContentGrid :content="homePage.Tours">
+					<ContentLinks
+						:links="[{ text: 'Show All', path: '/tours' }]" />
+				</ContentGrid>
+			</LayoutSquare>
+
+			<LayoutScroll
+				v-if="!this.$apollo.queries.tours.loading"
+				name="list__tour">
+				<ContentList type="tours" :content="tours" />
+			</LayoutScroll>
+		</LayoutSection>
+
+		<!-- CONTACT -->
+		<LayoutSection id="contact">
+			<LayoutSquare
+				v-if="!this.$apollo.queries.homePage.loading"
+				name="contact">
+				<ContentGrid :content="homePage.Contact">
+					<!-- <ContentLinks
+						:links="[
+							{ text: 'About me', path: '/', hash: '#about' },
+							{ text: 'Tours', path: '/', hash: '#tours' },
+						]" /> -->
+					<ContentSocial />
+				</ContentGrid>
+			</LayoutSquare>
 		</LayoutSection>
 	</main>
 </template>
@@ -129,7 +166,31 @@ export default Vue.extend({
 			query: gql`
 				query getBlogPosts($locale: String) {
 					blogs(locale: $locale, limit: 2) {
+						id
 						Title
+						ShortDescription
+						Content
+					}
+				}
+			`,
+			variables() {
+				return {
+					locale: this.currentLocale,
+				};
+			},
+			prefetch: true,
+		},
+		tours: {
+			query: gql`
+				query getTours($locale: String) {
+					tours(locale: $locale) {
+						id
+						Title
+						LengthInMinutes
+						Description
+						Cover {
+							url
+						}
 					}
 				}
 			`,

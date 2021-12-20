@@ -1,7 +1,4 @@
 export default {
-	//added myself:
-	// mode: "universal",
-	// Global page headers: https://go.nuxtjs.dev/config-head
 	head: {
 		title: 'frontend-nuxt',
 		htmlAttrs: {
@@ -20,17 +17,13 @@ export default {
 	},
 
 	// Global CSS: https://go.nuxtjs.dev/config-css
-	// "~/assets/scss-old/screen.scss",
 	css: [
 		'~/assets/scss/screen.scss',
 		'@fortawesome/fontawesome-svg-core/styles.css',
 	],
 
 	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-	plugins: [
-		'~/plugins/fontawesome.js',
-		// '~/plugins/firebase.js'
-	],
+	plugins: ['~/plugins/fontawesome.js'],
 
 	// Auto import components: https://go.nuxtjs.dev/config-components
 	components: true,
@@ -40,12 +33,11 @@ export default {
 		// https://go.nuxtjs.dev/typescript
 		'@nuxt/typescript-build',
 	],
+
 	// Modules: https://go.nuxtjs.dev/config-modules
 	modules: [
 		'@nuxtjs/i18n',
-		// '@nuxtjs/auth-next',
 		'@nuxtjs/apollo',
-		'@nuxtjs/pwa',
 		'@nuxtjs/firebase',
 		// '@nuxtjs/axios',
 	],
@@ -55,71 +47,7 @@ export default {
 
 	// ADDED MYSELF:
 	router: {
-		middleware: [
-			'mobile',
-			// 'auth'
-		],
-	},
-	//auth
-	auth: {
-		redirect: {
-			login: '/login', // User will be redirected to this path if login is required.
-			home: '/profile', // User will be redirected to this path if logged in.
-			logout: '/', // User will be redirected to this path if logged out.
-		},
-		strategies: {
-			local: {
-				token: {
-					property: 'token',
-					global: true,
-				},
-				endpoints: {
-					login: {
-						url: 'http://localhost:4000/login', // 3001/sessions
-						method: 'post',
-						propertyName: 'jwt',
-					},
-					logout: {
-						url: 'http://localhost:4000/logout',
-						method: 'post',
-					},
-					user: {
-						url: 'http://localhost:4000/user',
-						method: 'get',
-						propertyName: 'user',
-					},
-				},
-			},
-			cookie: {
-				cookie: {
-					name: 'jwt',
-				},
-				endpoints: {
-					login: {
-						url: 'http://localhost:4000/login', // 3001/sessions
-						method: 'post',
-						propertyName: 'message',
-					},
-					logout: {
-						url: 'http://localhost:4000/logout',
-						method: 'post',
-					},
-					user: {
-						url: 'http://localhost:4000/user',
-						method: 'get',
-						propertyName: 'data',
-					},
-				},
-			},
-			facebook: {
-				endpoints: {
-					userInfo:
-						'https://graph.facebook.com/v6.0/me?fields=id,name,picture{url}',
-				},
-				clientId: '643924513440800',
-				scope: ['public_profile', 'email'],
-			},
-		},
+		middleware: ['mobile'], //, 'auth'
 	},
 	// internationalization plugin config
 	i18n: {
@@ -143,10 +71,8 @@ export default {
 			},
 		},
 	},
-	// head() {
-	// 	return this.$nuxtI18nHead({ addSeoAttributes: true });
-	// },
-	// graphql api
+
+	//graphql
 	apollo: {
 		clientConfigs: {
 			default: {
@@ -157,10 +83,8 @@ export default {
 			},
 		},
 	},
-	// rest api
-	// axios: {
-	// 	// proxy: true
-	// },
+
+	//firebase
 	firebase: {
 		config: {
 			apiKey: 'AIzaSyDDUF1aLkjnjGIeCaIwC_Hz_owLcgBTfmM',
@@ -175,14 +99,10 @@ export default {
 			auth: {
 				persistence: 'local', // default
 				initialize: {
-					// onAuthStateChangedMutation:
-					// 	'ON_AUTH_STATE_CHANGED_MUTATION',
 					onAuthStateChangedAction: 'onAuthStateChangedAction',
-					subscribeManually: false,
+					// onAuthStateChangedMutation: 'ON_AUTH_STATE_CHANGED_MUTATION',
 				},
 				ssr: false, // default false
-				// emulatorPort: 9099,
-				// emulatorHost: 'http://localhost',
 			},
 			// firestore: true,
 		},
