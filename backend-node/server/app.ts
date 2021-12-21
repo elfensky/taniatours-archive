@@ -18,7 +18,7 @@ import {
 //SEEDER
 import seedDatabase from './seeders/seeder'
 
-//CONTROLLERS
+//CONTROLLERS (REST)
 import { BirdController } from './controllers/bird.controller'
 
 //GRAPHQL

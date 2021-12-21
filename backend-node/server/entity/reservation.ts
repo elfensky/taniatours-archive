@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
-import { User } from './user'
+// import { User } from './user'
 
 @ObjectType()
 @InputType('ReservationsInput')

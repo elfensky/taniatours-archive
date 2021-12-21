@@ -19,8 +19,8 @@ const seedDatabase = async (connection: Connection) => {
 		const isSeeded = await getRepository(Config).findOne('seeded')
 		//IF NOT SEEDED
 		if (isSeeded === undefined) {
-			// const birdsORM = plainToClass(Bird, birds)
-			// await connection.manager.save(birdsORM) //deze lijst van vogels in de lijst
+			const birdsORM = plainToClass(Bird, birds)
+			await connection.manager.save(birdsORM) //deze lijst van vogels in de lijst
 
 			const usersORM = plainToClass(User, users)
 			await connection.manager.save(usersORM)

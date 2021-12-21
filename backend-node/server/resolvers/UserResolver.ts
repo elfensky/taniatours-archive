@@ -1,6 +1,5 @@
 import { Arg, Mutation, Query, Resolver } from 'type-graphql'
 import { EntityManager, getManager, Repository, getRepository } from 'typeorm'
-// import { Reservation } from '../entity/reservation'
 import { User } from '../entity/user'
 
 @Resolver()

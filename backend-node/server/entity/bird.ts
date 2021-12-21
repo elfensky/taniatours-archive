@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
+import { Field, InputType, ObjectType } from 'type-graphql'
 
 @Entity('birds')
 export class Bird {

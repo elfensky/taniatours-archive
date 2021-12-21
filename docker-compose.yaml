@@ -15,6 +15,7 @@ services:
 
     # STRAPI (CONTENT API)
     strapi:
+        # container_name: backend-strapi
         image: strapi/strapi
         environment:
             DATABASE_CLIENT: mysql
@@ -38,7 +39,7 @@ services:
             context: ./backend-node/
             dockerfile: ./Dockerfile #remove ./ if it doesn't work
         env_file:
-            - ./backend-node/ormconfig.production.env
+            - ./backend-node/ormconfig.docker.env
         environment:
             NODE_ENV: Production
         ports:
@@ -47,12 +48,12 @@ services:
             - mariadb
 
     # NUXT FRONTEND
-    nuxt:
-        image: elfensky/taniatours-nuxt
-        build:
-            context: ./frontend-nuxt/
-            dockerfile: ./Dockerfile
-        ports:
-            - 3000:3000
-        depends_on:
-            - strapi
+    # nuxt:
+    #     image: elfensky/taniatours-nuxt
+    #     build:
+    #         context: ./frontend-nuxt/
+    #         dockerfile: ./Dockerfile
+    #     ports:
+    #         - 3000:3000
+    #     depends_on:
+    #         - strapi

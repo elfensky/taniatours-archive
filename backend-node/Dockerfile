@@ -7,8 +7,8 @@ RUN mkdir -p /app
 WORKDIR /app
 
 # update and install dependency
-RUN apk update && apk upgrade
-RUN apk add git
+# RUN apk update && apk upgrade
+# RUN apk add git
 
 # copy the app, note .dockerignore
 COPY . /app
@@ -26,4 +26,4 @@ ENV PORT=3001
 EXPOSE 3001
 
 # RUN npm run start 
-CMD [ "npm", "production" ]
+CMD [ "npm", "start" ]

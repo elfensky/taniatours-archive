@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "npx tsc -p . && node dist/app.js",
+		"start": "npx pm2-runtime dist/app.js",
 		"dev": "npx nodemon --watch 'server/**/*' --exec 'ts-node' server/app.ts",
 		"lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
 		"format": "prettier .  --write",
