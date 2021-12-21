@@ -1,84 +1,122 @@
 <template>
-	<main class="o-container c-signup">
-		<form class="c-form" @submit.prevent="signup">
-			<label for="name" class="c-label">Full Name</label>
-			<input
-				class="c-input"
-				name="name"
-				type="text"
-				placeholder="Tatiana Lavrenova"
-				required
-				v-model="userData.fullname" />
+	<main class="o-container c-login">
+		<!-- <div v-if="isLoggedIn">logged in as {{ user.email }}</div> -->
+		<div v-if="isLoggedIn">{{ redirect() }}</div>
+		<!-- <div v-else>you're not logged in</div> -->
 
-			<label for="phone" class="c-label">Phone</label>
-			<input
-				class="c-input"
-				name="phone"
-				type="tel"
-				placeholder="+32 111 222 333"
-				required
-				v-model="userData.phone" />
-
+		<form v-else class="c-form" @submit.prevent="signup">
 			<label for="email" class="c-label">Email</label>
 			<input
 				class="c-input"
-				name="email"
 				type="text"
-				placeholder="me@example.com"
-				required
-				v-model="userData.email" />
+				name="email"
+				v-model="formData.email"
+				placeholder="email"
+				required />
 
 			<label for="password" class="c-label">Password</label>
 			<input
-				class="c-input"
-				name="password"
 				type="password"
+				name="password"
+				v-model="formData.password"
 				placeholder="****************"
-				required
-				v-model="userData.password" />
+				required />
 			<input type="submit" value="Signup" />
+			<button @click="reset">Forgot Password</button>
 		</form>
+		<!-- <div id="firebaseui-auth-container"></div> -->
+		<!-- <button @click="loginFB">Login with Facebook</button> -->
 	</main>
 </template>
 
 <script>
-export default {
+//lang="ts"
+import Vue from 'vue';
+import { mapState, mapGetters } from 'vuex';
+
+export default Vue.extend({
+	computed: {
+		// authUser: (state) => state.authUser,
+		// isLoggedIn: 'isLoggedIn'
+		...mapState({
+			user: (state) => state.user,
+		}),
+		...mapGetters({
+			isLoggedIn: 'isLoggedIn',
+		}),
+	},
 	data() {
 		return {
-			userData: {
-				fullname: 'Andrei Lavrenov',
-				phone: '+32488218790',
+			formData: {
 				email: 'andrei@lavrenov.io',
-				password: 'password123',
+				password: 'L3g3ndarySkyrim',
 			},
+			error: null,
 		};
 	},
 	methods: {
 		async signup() {
-			await fetch('http://localhost:4000/signup', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(this.userData),
-			});
-			// await this.$router.push('/login');
-			login();
+			// this.$fire.auth.signinw
+			// this.$fire.auth
+			// 	.signInWithEmailAndPassword(
+			// 		this.userInput.email,
+			// 		this.userInput.password,
+			// 	)
+			// 	.catch(function (error) {
+			// 		// Handle Errors here.
+			// 		var errorCode = error.code;
+			// 		var errorMessage = error.message;
+			// 		if (errorCode === 'auth/wrong-password') {
+			// 			alert('Wrong password.');
+			// 		} else {
+			// 			alert(errorMessage);
+			// 		}
+			// 		console.log(error);
+			// 	})
+			// 	.then(this.$router.push('/profile'));
+			try {
+				await this.$fire.auth.createUserWithEmailAndPassword(
+					this.formData.email,
+					this.formData.password,
+				);
+			} catch (e) {
+				alert(e);
+			}
 		},
-		async login() {
-			console.log('execute login function');
+		reset() {
+			this.$fire.auth
+				.sendPasswordResetEmail(this.formData.email, actionCodeSettings)
+				.then(function () {
+					// Password reset email sent.
+				})
+				.catch(function (error) {
+					// Error occurred. Inspect error.code.
+				});
+		},
+		redirect() {
+			this.$router.push('/profile');
 		},
 	},
-};
+});
+// if (this.isLoggedIn) {
+// 	redirect();
+// }
 </script>
 
 <style lang="scss" scoped>
 //a comment inside css to check scss works
-.c-signup {
+.c-login {
 	width: 100vw;
 	max-width: 100%;
 	height: 100vh;
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+
+	&__title {
+		margin-bottom: 1em;
+	}
 
 	form {
 		display: flex;

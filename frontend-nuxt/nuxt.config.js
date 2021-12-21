@@ -17,10 +17,7 @@ export default {
 	},
 
 	// Global CSS: https://go.nuxtjs.dev/config-css
-	css: [
-		'~/assets/scss/screen.scss',
-		'@fortawesome/fontawesome-svg-core/styles.css',
-	],
+	css: ['~/assets/scss/screen.scss', '@fortawesome/fontawesome-svg-core/styles.css'],
 
 	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
 	plugins: ['~/plugins/fontawesome.js'],
@@ -78,8 +75,9 @@ export default {
 			// default: {
 			// 	httpEndpoint: 'http://localhost:1337/graphql',
 			// },
+
 			strapi: {
-				httpEndpoint: 'http://localhost:1337/graphql',
+				httpEndpoint: 'http://localhost:1337/graphql', //host.docker.internal
 			},
 			express: {
 				httpEndpoint: 'http://localhost:3001/graphql',

@@ -48,8 +48,8 @@ export default Vue.extend({
 	data() {
 		return {
 			formData: {
-				email: 'andrei@lavrenov.io',
-				password: 'L3g3ndarySkyrim',
+				// email: 'andrei@lavrenov.io',
+				// password: 'L3g3ndarySkyrim',
 			},
 			error: null,
 		};

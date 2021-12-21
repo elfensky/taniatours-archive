@@ -7,8 +7,8 @@ RUN mkdir -p /app
 WORKDIR /app
 
 # update and install dependency
-RUN apk update && apk upgrade
-RUN apk add git
+# RUN apk update && apk upgrade
+# RUN apk add git
 
 # copy the app, note .dockerignore
 COPY . /app

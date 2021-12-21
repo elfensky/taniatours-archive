@@ -2,36 +2,40 @@
 	<main class="o-main">
 		<!-- //o-container c-profile -->
 		<LayoutSection id="header">
-			<LayoutEmpty />
+			<!-- <LayoutEmpty /> -->
 			<LayoutSquare name="color--solid">
 				<ContentGrid style="border-right: none" :content="userData"></ContentGrid>
 			</LayoutSquare>
-		</LayoutSection>
 
-		<LayoutSection id="header" class="c-reservations">
-			<!-- <LayoutEmpty /> -->
-			<table
-				id="reservations"
-				class="c-reservations__table"
-				v-if="!this.$apollo.queries.getReservationsByUser.loading">
-				<tr class="c-reservations__row">
-					<th>Tour</th>
-					<th>Reservation</th>
-					<th>Delete</th>
-				</tr>
-				<tr
-					:id="item.uuid"
-					class="c-reservations__row"
-					v-for="item in getReservationsByUser"
-					:key="item.uuid">
-					<td>{{ item.tourid }}</td>
-					<td>{{ humanTime(item.requested_datetime) }}</td>
-					<!-- <button>Edit</button> -->
-					<td>
-						<button @click="deleteReservationV2(item.uuid)">Delete</button>
-					</td>
-				</tr>
-			</table>
+			<div style="display: flex; flex-grow: 1" class="c-reservations">
+				<table
+					id="reservations"
+					class="c-reservations__table"
+					v-if="!this.$apollo.queries.getReservationsByUser.loading">
+					<tr class="c-reservations__row">
+						<th>Tour</th>
+						<th>Reservation</th>
+						<th>Delete</th>
+					</tr>
+					<tr
+						:id="item.uuid"
+						class="c-reservations__row"
+						v-for="item in getReservationsByUser"
+						:key="item.uuid">
+						<td>{{ item.tourid }}</td>
+						<td>{{ humanTime(item.requested_datetime) }}</td>
+						<!-- <button>Edit</button> -->
+						<td>
+							<button @click="deleteReservationV2(item.uuid)">
+								Delete
+							</button>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<!-- show all reservations if admin -->
+			<!-- <div v-if=""></div> -->
 		</LayoutSection>
 
 		<!-- <div> -->
@@ -85,7 +89,7 @@ export default Vue.extend({
 			userData: {
 				Title: 'Welcome',
 				Subtitle: this.$nuxt.$fire.auth.currentUser.email,
-				Description: 'You can see and your reservations below',
+				Description: 'You can see and your reservations on the right',
 			},
 			userUID: this.$nuxt.$fire.auth.currentUser.uid,
 			// currentData: awaitthis.apollo.homePage,

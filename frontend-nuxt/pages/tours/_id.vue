@@ -1,36 +1,63 @@
 <template>
 	<main class="o-main">
-		<LayoutSection id="tours">
-			<LayoutSquare v-if="!this.$apollo.queries.tour.loading" name="tour">
-				<ContentGrid :content="tour"></ContentGrid>
-				<div v-if="$nuxt.$fire.auth.currentUser" style="margin-top: 10vh">
-					<!-- <button>Place a reservation</button> -->
-					<form class="c-form" @submit.prevent="placeReservation">
-						<label for="datetime" class="c-label">Date & Time</label>
-						<input
-							class="c-input"
-							type="datetime-local"
-							id="datetime"
-							name="datetime"
-							v-model="formData.reservartionDate"
-							required />
+		<LayoutSection id="header">
+			<LayoutEmpty>
+				<ContentImage
+					:src="'http://localhost:1337' + tour.Cover.url"
+					v-if="!this.$apollo.queries.tour.loading" />
+			</LayoutEmpty>
 
-						<label for="peopleAmount" class="c-label">How many people</label>
-						<input
-							class="c-input"
-							type="number"
-							id="peopleAmount"
-							name="peopleAmount"
-							min="1"
-							max="10"
-							v-model="formData.amountOfPeople"
-							required />
-						<input type="submit" value="Place Reservation" />
-					</form>
-				</div>
-				<div v-else>You must login to book a tour</div>
+			<LayoutSquare
+				name="color--transparent"
+				v-if="!this.$apollo.queries.tour.loading">
+				<ContentGrid
+					class="o-grid--right"
+					style="border-right: none"
+					:content="tour"></ContentGrid>
 			</LayoutSquare>
 		</LayoutSection>
+
+		<section class="c-tour">
+			<div v-if="$nuxt.$fire.auth.currentUser">
+				<!-- <button>Place a reservation</button> -->
+				<form class="c-form" @submit.prevent="placeReservation">
+					<h3>{{ Notification }}</h3>
+					<h1>Reservation</h1>
+					<label for="datetime" class="c-label">Date & Time</label>
+					<input
+						class="c-input"
+						type="datetime-local"
+						id="datetime"
+						name="datetime"
+						v-model="formData.reservartionDate"
+						required />
+
+					<label for="peopleAmount" class="c-label">How many people</label>
+					<input
+						class="c-input"
+						type="number"
+						id="peopleAmount"
+						name="peopleAmount"
+						min="1"
+						max="10"
+						v-model="formData.amountOfPeople"
+						required />
+					<input type="submit" value="Place Reservation" />
+				</form>
+			</div>
+			<div
+				v-else
+				style="
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					justify-content: center;
+				">
+				You must login to book a tour
+				<nuxt-link :to="localePath('/auth/login')">Login</nuxt-link>
+				<nuxt-link :to="localePath('/auth/signup')">Signup</nuxt-link>
+			</div>
+		</section>
 	</main>
 </template>
 
@@ -60,6 +87,7 @@ export default Vue.extend({
 				reservartionDate: '2022-01-01T12:00',
 				amountOfPeople: 1,
 			},
+			Notification: '',
 		};
 	},
 	mounted() {
@@ -86,6 +114,8 @@ export default Vue.extend({
 					},
 				},
 			});
+
+			this.Notification = 'Reserved successfully!';
 		},
 	},
 	updated() {
@@ -117,3 +147,23 @@ export default Vue.extend({
 	},
 });
 </script>
+
+<style lang="scss">
+.c-tour {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	min-height: 10vh;
+}
+
+.c-form {
+	padding: 10vh;
+}
+.c-label {
+	margin-top: 0.5vw;
+}
+.c-input {
+	margin-bottom: 1vw;
+}
+</style>

@@ -1,13 +1,14 @@
 <template>
 	<nav class="navigation">
 		<div class="localization">
-			<nuxt-link :to="switchLocalePath('en')">English</nuxt-link>
-			<nuxt-link :to="switchLocalePath('ru')">Russian</nuxt-link>
-			<h2>Selected: {{ $i18n.locale }}</h2>
+			<nuxt-link :to="switchLocalePath('en')">EN</nuxt-link>
+			<nuxt-link :to="switchLocalePath('ru')">RU</nuxt-link>
+			<!-- <h2>Selected: {{ $i18n.locale }}</h2> -->
 		</div>
 		<div v-if="!isLoggedIn" class="guest">
+			<nuxt-link :to="localePath('/')">Home</nuxt-link>
 			<nuxt-link :to="localePath('/auth/login')">Login</nuxt-link>
-			<nuxt-link :to="localePath('/auth/login')">Signup</nuxt-link>
+			<nuxt-link :to="localePath('/auth/signup')">Signup</nuxt-link>
 		</div>
 		<div v-else class="user">
 			<nuxt-link :to="localePath('/')">Home</nuxt-link>
@@ -48,7 +49,7 @@ export default Vue.extend({
 });
 </script>
 
-<style scoped>
+<style lang="scss">
 .navigation {
 	position: fixed;
 	z-index: 999;
@@ -61,6 +62,11 @@ export default Vue.extend({
 }
 
 .localization {
-	color: red !important;
+	// color: red !important;
+	mix-blend-mode: darken;
+	// &:after {
+	// 	color: rgb(0, 255, 255);
+	// 	mix-blend-mode: difference;
+	// }
 }
 </style>

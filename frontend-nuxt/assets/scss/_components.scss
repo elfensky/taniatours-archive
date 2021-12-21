@@ -2,6 +2,12 @@
 #contact {
 	z-index: 1;
 }
+.c-list {
+	&--tours {
+		background-color: white;
+	}
+}
+
 .c-tours {
 	z-index: -1;
 	&__grid {
@@ -13,6 +19,12 @@
 			position: fixed;
 			top: 0;
 			left: 0;
+			// min-width: 50vw;
+			// width: calc(50vw - 100px);
+			// width: 50vw;
+			width: 50%;
+			min-width: calc(95vh);
+			max-width: 50vw;
 		}
 	}
 
@@ -226,6 +238,14 @@
 			width: 100%;
 		}
 	}
+
+	.c-list {
+		width: 65vw;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
 }
 
 //tablet-landscape
@@ -235,8 +255,14 @@
 	// 		margin-top: 0px;
 	// 	}
 	// }
+	.c-list {
+		margin-top: 25vh;
+	}
 }
 
 //widescreen
 @media (min-aspect-ratio: 2/1) {
+	.c-list {
+		margin-top: 25vh;
+	}
 }

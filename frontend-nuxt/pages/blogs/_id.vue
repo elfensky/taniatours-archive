@@ -1,8 +1,19 @@
 <template>
 	<main class="o-main">
-		<LayoutSection id="blogs">
-			<LayoutSquare v-if="!this.$apollo.queries.blog.loading" name="blog">
-				<ContentGrid :content="blog"></ContentGrid>
+		<LayoutSection id="header">
+			<LayoutEmpty>
+				<ContentImage
+					:src="'http://localhost:1337' + blog.Cover.url"
+					v-if="!this.$apollo.queries.blog.loading" />
+			</LayoutEmpty>
+
+			<LayoutSquare
+				name="color--transparent"
+				v-if="!this.$apollo.queries.blog.loading">
+				<ContentGrid
+					class="o-grid--right"
+					style="border-right: none"
+					:content="blog"></ContentGrid>
 			</LayoutSquare>
 		</LayoutSection>
 	</main>
@@ -43,7 +54,8 @@ export default Vue.extend({
 					blog(id: $id) {
 						Title
 						Subtitle
-						Content
+						ContentTitle
+						ContentText
 						Cover {
 							url
 						}

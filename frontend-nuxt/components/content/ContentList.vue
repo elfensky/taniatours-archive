@@ -1,14 +1,14 @@
 <template>
 	<div>
 		<!-- BLOGS  -->
-		<div v-if="type == 'blogs'">
+		<div class="c-list" v-if="type == 'blogs'">
 			<article
 				v-for="item in ContentArray"
 				:key="item.id"
 				class="o-article c-blog__post">
 				<h3 class="c-blog__post__title">{{ item.Title }}</h3>
 				<h4 class="c-blog__post__info">{{ item.Subtitle }}</h4>
-				<p class="c-blog__post__info">{{ item.Content }}</p>
+				<p class="c-blog__post__info">{{ item.Description }}</p>
 				<!-- <nuxt-link class="c-link" :to="'/blogs/' + item.id"
 				>Readmore</nuxt-link
 			> -->
@@ -24,15 +24,13 @@
 		</div>
 
 		<!-- TOURS  -->
-		<div v-if="type == 'tours'">
+		<div class="c-list" v-if="type == 'tours'">
 			<article
 				v-for="item in ContentArray"
 				:key="item.id"
 				class="o-article c-tour__post">
 				<h3 class="c-tour__post__title">{{ item.Title }}</h3>
-				<h4 class="c-tour__post__info">
-					{{ item.LengthInMinutes }} minutes
-				</h4>
+				<h4 class="c-tour__post__info">{{ item.LengthInMinutes }} minutes</h4>
 				<p class="c-tour__post__info">{{ item.Description }}</p>
 
 				<ContentLinks

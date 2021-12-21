@@ -56,7 +56,7 @@
 				name="tours"
 				id="tours_container">
 				<ContentGrid :content="homePage.Tours" id="tours_grid">
-					<ContentLinks :links="[{ text: 'Show All', path: '/tours' }]" />
+					<!-- <ContentLinks :links="[{ text: 'Show All', path: '/tours' }]" /> -->
 				</ContentGrid>
 			</LayoutSquare>
 
@@ -202,7 +202,7 @@ export default Vue.extend({
 						id
 						Title
 						Subtitle
-						Content
+						Description
 					}
 				}
 			`,
