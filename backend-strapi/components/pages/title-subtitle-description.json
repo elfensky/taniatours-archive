@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_pages_title_subtitle_descriptions",
+  "info": {
+    "name": "TitleSubtitleDescription",
+    "icon": "align-justify"
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Subtitle": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "string"
+    }
+  }
+}
