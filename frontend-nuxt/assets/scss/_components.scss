@@ -1,0 +1,268 @@
+// Components – Style rules for UI components.
+#contact {
+	z-index: 1;
+}
+.c-list {
+	&--tours {
+		background-color: white;
+	}
+}
+
+.c-tours {
+	z-index: -1;
+	&__grid {
+		// height: 100vh;
+		// height: calc(100vw/2);
+		// z-index: -3;
+
+		&--fixed {
+			position: fixed;
+			top: 0;
+			left: 0;
+			// min-width: 50vw;
+			// width: calc(50vw - 100px);
+			// width: 50vw;
+			width: 50%;
+			min-width: calc(95vh);
+			max-width: 50vw;
+		}
+	}
+
+	// &__container {
+	// 	// padding-top: 35vh;
+	// 	&--fixed {
+	// 		margin-left: 50%;
+	// 	}
+	// }
+}
+.c-image {
+	object-fit: cover;
+	object-position: center;
+	filter: none !important;
+	max-height: 100vh;
+}
+.c-form {
+	display: flex;
+	flex-direction: column;
+}
+
+.c-reservations {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+
+	&__table {
+		// display: flex;
+		// flex-direction: row;
+		border-collapse: collapse;
+		width: 50%;
+	}
+	&__row {
+		border: 1px solid #dddddd;
+		text-align: left;
+		padding: 8px;
+	}
+	&__row:nth-child(even) {
+		background-color: #dddddd;
+	}
+}
+
+.c-color {
+	&--solid {
+		background-color: rgb(230, 230, 20);
+	}
+	&--transparent {
+		background-color: rgba(230, 230, 20, 0.75);
+	}
+}
+.c-video {
+	&__container {
+		position: absolute;
+		z-index: -2;
+		width: 100%;
+		height: 100%;
+	}
+	&__file {
+		object-fit: cover;
+		width: 100vw;
+		max-width: 100%;
+		height: 100vh;
+		top: 0;
+		left: 0;
+	}
+}
+
+.c-header {
+	background-color: rgba(1, 1, 1, 0.5);
+	color: white;
+}
+
+.c-social {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+}
+
+.c-icon {
+	transition: $animate;
+
+	&:hover {
+		transform: translateY(-0.1em);
+		// transform: scale(1.05);
+		transition: $animate;
+	}
+	&--instagram:hover svg * {
+		fill: url(#rg);
+	}
+	&--facebook:hover {
+		color: #3b5998;
+	}
+	&--twitter:hover {
+		color: #1da1f2;
+	}
+	&--whatsapp:hover {
+		color: #25d366;
+	}
+	&--viber:hover {
+		color: rgb(115, 96, 242);
+	}
+}
+
+.c-link {
+	text-decoration: none;
+	border-bottom: 2px solid transparent;
+	line-height: 1em;
+	display: flex;
+	flex-direction: row;
+
+	&__arrow1:before {
+		content: ' ';
+		white-space: pre;
+	}
+
+	&:hover {
+		border-bottom: 2px solid white;
+	}
+	&:hover &__arrow1 {
+		animation: 1.5s infinite linkhover1;
+		animation-timing-function: ease-out;
+	}
+	&:hover &__arrow2 {
+		animation: 1.5s infinite linkhover2;
+		animation-timing-function: ease-out;
+	}
+}
+
+.c-blog {
+	&__list {
+		margin-top: 50vh;
+	}
+}
+
+@keyframes linkhover1 {
+	// 0% {
+	// 	transform: translateX(0);
+	// }
+	5% {
+		transform: translateX(0);
+	}
+	15% {
+		transform: translateX(0.25em);
+	}
+	25% {
+		transform: translateX(0.25em);
+	}
+	35% {
+		transform: translateX(0);
+	}
+	// 90% {
+	// 	transform: translateX(0);
+	// }
+}
+
+@keyframes linkhover2 {
+	0% {
+		transform: translateX(0);
+	}
+	10% {
+		transform: translateX(0.25em);
+	}
+	// 40% {
+	// 	transform: translateX(0.25em);
+	// }
+	30% {
+		transform: translateX(0.25em);
+	}
+	40% {
+		transform: translateX(0);
+	}
+	// 100% {
+	// 	transform: translateX(0);
+	// }
+}
+
+#blog {
+	background-image: url(../images/belgium.jpg);
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#contact {
+	background: linear-gradient(rgba(200, 200, 80, 0.5), rgba(200, 200, 80, 0.5)),
+		url('../images/map.jpg');
+	// background-image: url(../images/map.jpg);
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	// filter: blur(8px);
+}
+
+//mobile view
+@media (max-aspect-ratio: 5/4) {
+	.c-icon {
+		font-size: 4vh;
+	}
+
+	.c-blog {
+		&__list {
+			margin-top: 0px;
+		}
+	}
+
+	.c-reservations {
+		&__table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+	}
+
+	.c-list {
+		width: 65vw;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+}
+
+//tablet-landscape
+@media (min-aspect-ratio: 5/4) and (max-aspect-ratio: 2/1) {
+	// .c-blog {
+	// 	&__list {
+	// 		margin-top: 0px;
+	// 	}
+	// }
+	.c-list {
+		margin-top: 25vh;
+	}
+}
+
+//widescreen
+@media (min-aspect-ratio: 2/1) {
+	.c-list {
+		margin-top: 25vh;
+	}
+}

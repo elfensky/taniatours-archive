@@ -1,0 +1,24 @@
+// Elements – Style rules for bare HTML elements (like h1 or button).
+
+* {
+	font-family: $font-secondary;
+}
+
+h1 {
+	font-weight: $bold;
+	font-family: $font-primary;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: $medium;
+	font-family: $font-primary;
+}
+
+// body {
+// 	font-family: $regular;
+// 	font-family: $font-secondary;
+// }

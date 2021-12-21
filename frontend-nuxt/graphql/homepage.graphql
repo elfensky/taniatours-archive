@@ -1,0 +1,29 @@
+query {
+	homePage(locale: "en") {
+		Header {
+			Title
+			Subtitle
+			Description
+		}
+		About {
+			Title
+			Subtitle
+			Description
+		}
+		Blog {
+			Title
+			Subtitle
+			Description
+		}
+		Tours {
+			Title
+			Subtitle
+			Description
+		}
+		Contact {
+			Title
+			Subtitle
+			Description
+		}
+	}
+}
